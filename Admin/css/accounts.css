@@ -1,0 +1,222 @@
+/* Màu sắc chính cho toàn bộ giao diện */
+body {
+    font-family: 'Arial', sans-serif;  /* Thay đổi font chữ cơ bản */
+    background-color: #4e657a;  /* Màu nền tối */
+    color: #f5f5f5;  /* Màu chữ sáng */
+  }
+  
+  /* Tiêu đề và các phần quan trọng */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;  /* Sử dụng font chữ hiện đại cho tiêu đề */
+    color: #f5a623;  /* Màu vàng cam cho tiêu đề để nổi bật */
+    font-weight: bold;
+  }
+  
+  /* Thêm sự khác biệt cho các đoạn văn bản */
+  p {
+    font-family: 'Georgia', serif;  /* Font chữ serif để phân biệt */
+    color: #e1e1e1;  /* Màu chữ sáng hơn để dễ đọc */
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #567086;
+  }
+  
+  .navbar .navbar-brand {
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .navbar-nav .active > .nav-link {
+    background-color: #f5a623;
+    color: #fff;
+  }
+  
+  /* Chỉnh sửa màu cho bảng */
+  .table {
+    background-color: #50697f;
+    color: #fff;
+  }
+  
+  thead {
+    background-color: #486177;
+    color: #fff;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #34495e;
+    color: #f5f5f5;
+  }
+  
+  /* Nút và các tương tác */
+  .btn-primary {
+    color: #fff;
+    background-color: #f5a623;
+    border: 2px solid #f5a623;
+  }
+  
+  .btn-primary:hover,
+  .btn-primary:active {
+    background-color: transparent;
+    color: #f5a623;
+    border-color: #f5a623;
+  }
+  
+  /* Form control */
+  .form-control {
+    background-color: #54657d;
+    color: #fff;
+  }
+  
+  .form-control:focus {
+    background-color: #60738e;
+    border-color: transparent;
+    box-shadow: 0 0 0 0.1rem rgb(180, 206, 233, 0.5);
+  }
+  
+  /* Các trạng thái khác */
+  .moving {
+    background-color: #9be64d;
+    box-shadow: 0 0 8px #9be64d, inset 0 0 8px #9be64d;
+  }
+  
+  .pending {
+    background-color: #efc54b;
+    box-shadow: 0 0 8px #efc54b, inset 0 0 8px #efc54b;
+  }
+  
+  .cancelled {
+    background-color: #da534f;
+    box-shadow: 0 0 8px #da534f, inset 0 0 8px #da534f;
+  }
+  
+  /* Các liên kết trong footer */
+  .tm-footer-link {
+    color: white;
+  }
+  
+  .tm-footer-link:hover,
+  .tm-footer-link:focus {
+    color: #aacbea;
+  }
+  
+  /* Nút xóa và biểu tượng xóa */
+  .tm-trash-icon {
+    color: #6e6c6c;
+    cursor: pointer;
+  }
+  
+  .tm-trash-icon:hover {
+    color: #9f1321;
+  }
+  
+  /* Các vòng tròn trạng thái */
+  .tm-status-circle {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: -3px;
+  }
+  
+  .moving {
+    background-color: #9be64d;
+    box-shadow: 0 0 8px #9be64d, inset 0 0 8px #9be64d;
+  }
+  /* Căn giữa nội dung */
+.container, .row, .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Nút "Sửa" màu vàng */
+  .btn-edit {
+    color: #fff;
+    background-color: #f5a623;  /* Màu nền vàng */
+    border: 2px solid #f5a623;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-edit:hover,
+  .btn-edit:active {
+    background-color: #f0a21d;  /* Màu vàng đậm khi hover hoặc active */
+  }
+  
+  /* Trạng thái active của nút "Sửa" */
+  .btn-edit.active {
+    background-color: #27ae60;  /* Màu xanh lá khi active */
+    border-color: #27ae60;
+  }
+  
+  .btn-edit.locked {
+    background-color: #e74c3c;  /* Màu đỏ khi khóa */
+    border-color: #e74c3c;
+  }
+  
+  /* Trạng thái Khóa và Mở khóa giống nhau */
+  .btn-lock, .btn-unlock {
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    border: 2px solid;
+  }
+  
+  /* Khi Khóa */
+  .btn-lock {
+    background-color: #e74c3c;  /* Màu đỏ */
+    border-color: #e74c3c;
+  }
+  
+  .btn-lock:hover,
+  .btn-lock:active {
+    background-color: #c0392b;  /* Màu đỏ đậm khi hover */
+  }
+  
+  /* Khi Mở khóa */
+  .btn-unlock {
+    background-color: #27ae60;  /* Màu xanh lá */
+    border-color: #27ae60;
+  }
+  
+  .btn-unlock:hover,
+  .btn-unlock:active {
+    background-color: #2ecc71;  /* Màu xanh lá sáng khi hover */
+  }
+  /* Đảm bảo các phần tử không chen nhau */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;  /* Cho phép phần tử quấn dòng khi không đủ không gian */
+    gap: 15px;  /* Khoảng cách giữa các phần tử */
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .col {
+    flex: 1;
+    min-width: 200px;  /* Đảm bảo mỗi cột có chiều rộng tối thiểu */
+    margin: 10px;
+  }
+  
