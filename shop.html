@@ -76,7 +76,7 @@
             <div class="col-lg-6 col-md-5">
               <div class="header__top__right">
                 <div class="header__top__links">
-                  <a href="login.html">Sign in</a>
+                  <a href="login.html" id="userMenu">Sign in</a>
                   <a href="#">FAQs</a>
                 </div>
                 <div class="header__top__hover">
@@ -408,7 +408,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Piqué Biker Jacket</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -452,7 +454,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Black Sneaker</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -496,7 +500,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Brown Hooded Shirt Jacket</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -540,7 +546,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Gray Fringed Scarf</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -583,7 +591,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Brown Leather Backpack</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -626,7 +636,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Navy Henley T-shirt</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -669,7 +681,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Black Floral Graphic T-shirt</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -713,7 +727,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Perfume Set</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -756,7 +772,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>White Utility Backpack</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -800,7 +818,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Camouflage Hooded Jacket</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -843,7 +863,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Brown Leather Briefcase</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -886,7 +908,9 @@
                   </div>
                   <div class="product__item__text">
                     <h6>Gold Rectangular Cufflinks</h6>
-                    <a href="#" class="add-cart">+ Add To Cart</a>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
                     <div class="rating">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
@@ -1026,5 +1050,7 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
   </body>
 </html>

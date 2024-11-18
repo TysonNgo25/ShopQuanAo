@@ -24,6 +24,26 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/login.css" type="text/css" />
+
+    <style>
+      /* Định dạng nút login */
+      .field input[type="button"] {
+        background-color: #000; /* Màu đen ban đầu */
+        color: #fff; /* Màu chữ trắng */
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+      }
+
+      /* Hiệu ứng hover */
+      .field input[type="button"]:hover {
+        background-color: #0d8b09; /* Màu xanh khi di chuột */
+        color: #fff; /* Đảm bảo chữ vẫn màu trắng */
+      }
+    </style>
   </head>
 
   <body>
@@ -115,7 +135,7 @@
                     <li><a href="./blog-details.html">Blog Details</a></li>
                   </ul>
                 </li>
-                <li class="active"><a href="./blog.html">Blog</a></li>
+                <li class="actives"><a href="./blog.html">Blog</a></li>
                 <li><a href="./contact.html">Contacts</a></li>
               </ul>
             </nav>
@@ -146,13 +166,19 @@
         <div class="title">Login Form</div>
         <form action="#">
           <div class="field">
-            <input type="text" required />
-            <label>Email Address</label>
+            <input type="text" id="loginUsername" required />
+            <label>Username</label>
           </div>
           <div class="field">
-            <input type="password" required />
+            <input type="password" id="password" required style="width: 95%" />
             <label>Password</label>
+            <i
+              class="fa fa-eye"
+              id="togglePassword"
+              style="cursor: pointer"
+            ></i>
           </div>
+
           <div class="content">
             <div class="checkbox">
               <input type="checkbox" id="remember-me" />
@@ -163,7 +189,7 @@
             </div>
           </div>
           <div class="field">
-            <input type="submit" value="Login" />
+            <input type="button" value="Login" onclick="loginUser()" />
           </div>
           <div class="signup-link">
             Not a member? <a href="register.html">Signup now</a>
@@ -274,5 +300,19 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#password");
+      togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute using getAttribute() method
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        // Toggle the eye slash icon
+        this.classList.toggle("fa-eye-slash");
+      });
+    </script>
   </body>
 </html>
