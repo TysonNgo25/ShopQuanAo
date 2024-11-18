@@ -6,22 +6,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartTableBody = document.querySelector(
       ".shopping__cart__table tbody"
     );
-    const cartTotal = document.querySelector(".cart__total span");
-    const subtotal = document.querySelector(
-      ".cart__total ul li:first-child span"
+    const cartTotal = document.querySelector(
+      ".cart__total ul li:last-child span"
     );
 
     if (cart.length === 0) {
       cartTableBody.innerHTML = `
-          <tr>
-            <td colspan="4" class="text-center">Your cart is empty!</td>
-          </tr>`;
-      subtotal.textContent = "$0.00";
-      cartTotal.textContent = "$0.00";
+        <tr>
+          <td colspan="4" class="text-center">Your cart is empty!</td>
+        </tr>`;
+      if (cartTotal) cartTotal.textContent = "$0.00";
       return;
     }
-
-    let totalPrice = 0;
 
     cartTableBody.innerHTML = cart
       .map(
@@ -53,13 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
       )
       .join("");
 
-    // Tính tổng tiền
-    totalPrice = cart.reduce(
+    const totalPrice = cart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
-    subtotal.textContent = `$${totalPrice.toFixed(2)}`;
-    cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+    if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
   }
 
   // Thêm sản phẩm vào giỏ hàng
@@ -112,8 +106,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Hiển thị giỏ hàng
+  // Hiển thị giỏ hàng trên trang shopping-cart.html
   if (window.location.pathname.includes("shopping-cart.html")) {
     updateCartUI();
+  }
+
+  // Chuyển đến trang checkout
+  const checkoutButton = document.querySelector(".primary-btn");
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", function () {
+      if (cart.length === 0) {
+        alert(
+          "Your cart is empty! Add some products before proceeding to checkout."
+        );
+        return;
+      }
+      window.location.href = "checkout.html";
+    });
+  }
+
+  // Hiển thị giỏ hàng trên checkout.html
+  if (window.location.pathname.includes("checkout.html")) {
+    const orderList = document.querySelector(".checkout__total__products");
+    const totalElement = document.querySelector(
+      ".checkout__total__all li:last-child span"
+    );
+    const subtotalElement = document.querySelector(
+      ".checkout__total__all li:first-child span"
+    );
+
+    if (cart.length === 0) {
+      orderList.innerHTML = "<li>No items in cart</li>";
+      subtotalElement.textContent = "$0.00";
+      totalElement.textContent = "$0.00";
+      return;
+    }
+
+    let totalPrice = 0;
+
+    orderList.innerHTML = cart
+      .map(
+        (item) => `
+        <li>${item.quantity} x ${item.name} <span>$${(
+          item.price * item.quantity
+        ).toFixed(2)}</span></li>`
+      )
+      .join("");
+
+    totalPrice = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    subtotalElement.textContent = `$${totalPrice.toFixed(2)}`;
+    totalElement.textContent = `$${totalPrice.toFixed(2)}`;
   }
 });
