@@ -1,0 +1,65 @@
+/* General styling for form groups */
+.card-payment-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+.card-payment-form h5 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.card-payment-form .form-group {
+  margin-bottom: 15px;
+}
+
+.card-payment-form label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.card-payment-form .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.card-payment-form .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Flexbox layout for expiry date and CVV */
+.card-payment-form .form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.card-payment-form .form-group {
+  flex: 1;
+}
+
+/* Placeholder styling */
+.card-payment-form .form-control::placeholder {
+  font-style: italic;
+  color: #aaa;
+}
+
+/* Add responsive behavior for small screens */
+@media (max-width: 768px) {
+  .card-payment-form .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -160,4 +160,82 @@ document.addEventListener("DOMContentLoaded", function () {
     subtotalElement.textContent = `$${totalPrice.toFixed(2)}`;
     totalElement.textContent = `$${totalPrice.toFixed(2)}`;
   }
+  // Lấy các phần tử liên quan đến phương thức thanh toán
+  const paymentMethods = document.querySelectorAll(
+    'input[name="payment-method"]'
+  );
+  const bankTransferForm = document.querySelector(".bank-transfer-form"); // Form cho thanh toán chuyển khoản
+  const cardPaymentForm = document.querySelector(".card-payment-form"); // Form cho thanh toán qua thẻ
+
+  // Xử lý hiển thị form phù hợp khi người dùng chọn phương thức thanh toán
+  paymentMethods.forEach((method) => {
+    method.addEventListener("change", function () {
+      if (this.value === "transfer") {
+        // Hiển thị form chuyển khoản ngân hàng
+        bankTransferForm.style.display = "block";
+        cardPaymentForm.style.display = "none";
+      } else if (this.value === "card") {
+        // Hiển thị form nhập thông tin thẻ
+        bankTransferForm.style.display = "none";
+        cardPaymentForm.style.display = "block";
+      } else {
+        // Ẩn cả hai form nếu chọn tiền mặt
+        bankTransferForm.style.display = "none";
+        cardPaymentForm.style.display = "none";
+      }
+    });
+  });
+
+  // Xử lý logic khi nhấn nút "PLACE ORDER"
+  const placeOrderBtn = document.querySelector(".place-order-btn");
+  placeOrderBtn.addEventListener("click", function () {
+    // Lấy phương thức thanh toán đã được chọn
+    const selectedMethod = document.querySelector(
+      'input[name="payment-method"]:checked'
+    ).value;
+
+    if (selectedMethod === "transfer") {
+      // Kiểm tra xem người dùng đã nhập mã tham chiếu chuyển khoản chưa
+      const reference = document.getElementById("bank-reference").value;
+      if (!reference) {
+        alert("Please provide a reference number for the bank transfer."); // Thông báo nếu mã tham chiếu còn thiếu
+        return;
+      }
+      alert("Your bank transfer order has been placed!"); // Thông báo khi hoàn thành đặt hàng qua chuyển khoản
+    } else if (selectedMethod === "card") {
+      // Lấy thông tin thẻ từ form
+      const cardNumber = document.getElementById("card-number").value;
+      const cardHolder = document.getElementById("card-holder").value;
+      const expiryDate = document.getElementById("expiry-date").value;
+      const cvv = document.getElementById("cvv").value;
+
+      // Kiểm tra xem người dùng đã nhập đầy đủ thông tin thẻ chưa
+      if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
+        alert("Please provide complete card information."); // Thông báo nếu thiếu thông tin thẻ
+        return;
+      }
+      alert("Your card payment has been processed!"); // Thông báo khi thanh toán qua thẻ thành công
+    } else {
+      // Xử lý khi chọn thanh toán bằng tiền mặt
+      alert("Your cash payment order has been placed!"); // Thông báo khi đặt hàng bằng tiền mặt
+    }
+  });
+
+  document
+    .getElementById("card-number")
+    .addEventListener("input", function (e) {
+      const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
+      e.target.value = value.replace(/(\d{4})/g, "$1 ").trim(); // Thêm khoảng trắng sau mỗi 4 số
+    });
+
+  document
+    .getElementById("expiry-date")
+    .addEventListener("input", function (e) {
+      const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
+      if (value.length <= 2) {
+        e.target.value = value; // Nếu dưới 2 số, không thêm dấu "/"
+      } else {
+        e.target.value = value.slice(0, 2) + "/" + value.slice(2, 4); // Định dạng MM/YY
+      }
+    });
 });
