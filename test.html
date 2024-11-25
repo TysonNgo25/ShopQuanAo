@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Business Statistics</title>
+    <!-- Link to external CSS or Bootstrap for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="my-4">Business Dashboard</h1>
+
+                <!-- Date Range Filter -->
+                <div class="d-flex justify-content-between mb-4">
+                    <div>
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div>
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <button class="btn btn-primary" onclick="filterData()">Filter</button>
+                </div>
+
+                <!-- Product Sales Statistics -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Product Sales Statistics</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Quantity Sold</th>
+                                            <th>Total Revenue</th>
+                                            <th>View Invoice</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productTable">
+                                        <!-- Product data will go here -->
+                                    </tbody>
+                                </table>
+                                <p><strong>Total Revenue: </strong><span id="totalRevenue"></span></p>
+                                <p><strong>Most Popular Product: </strong><span id="mostPopular"></span></p>
+                                <p><strong>Least Popular Product: </strong><span id="leastPopular"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Sales Statistics -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Top 5 Customers</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Total Revenue</th>
+                                            <th>View Invoice</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="customerTable">
+                                        <!-- Customer data will go here -->
+                                    </tbody>
+                                </table>
+                                <p><strong>Total Revenue from Top 5 Customers: </strong><span id="topCustomersRevenue"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart for Revenue Over Time -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Giữ nguyên dữ liệu mẫu hiện tại
+        const productData = [
+            { name: "Shirt", quantity: 150, revenue: 3000, id: 1 },
+            { name: "Pants", quantity: 120, revenue: 2400, id: 2 },
+            { name: "Jacket", quantity: 80, revenue: 1600, id: 3 },
+            { name: "Socks", quantity: 200, revenue: 400, id: 4 },
+        ];
+
+        const customerData = [
+            { name: "John Doe", revenue: 1500, id: 1 },
+            { name: "Mary Jane", revenue: 1200, id: 2 },
+            { name: "James Smith", revenue: 1100, id: 3 },
+            { name: "Lucy Brown", revenue: 1000, id: 4 },
+            { name: "Michael Lee", revenue: 900, id: 5 },
+        ];
+
+        // Hàm hiển thị bảng sản phẩm
+        function renderProductTable() {
+            let totalRevenue = 0;
+            let mostPopular = productData[0];
+            let leastPopular = productData[0];
+
+            let tableHTML = '';
+            productData.forEach(product => {
+                totalRevenue += product.revenue;
+
+                if (product.revenue > mostPopular.revenue) mostPopular = product;
+                if (product.revenue < leastPopular.revenue) leastPopular = product;
+
+                tableHTML += `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.quantity}</td>
+                        <td>$${product.revenue}</td>
+                        <td><a href="invoice.html?product_id=${product.id}">View Invoice</a></td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('productTable').innerHTML = tableHTML;
+            document.getElementById('totalRevenue').innerText = `$${totalRevenue}`;
+            document.getElementById('mostPopular').innerText = mostPopular.name;
+            document.getElementById('leastPopular').innerText = leastPopular.name;
+        }
+
+        // Hàm hiển thị bảng khách hàng
+        function renderCustomerTable() {
+            let topCustomersRevenue = 0;
+            let tableHTML = '';
+            customerData.forEach(customer => {
+                topCustomersRevenue += customer.revenue;
+
+                tableHTML += `
+                    <tr>
+                        <td>${customer.name}</td>
+                        <td>$${customer.revenue}</td>
+                        <td><a href="invoice.html?customer_id=${customer.id}">View Invoice</a></td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('customerTable').innerHTML = tableHTML;
+            document.getElementById('topCustomersRevenue').innerText = `$${topCustomersRevenue}`;
+        }
+
+        // Hàm hiển thị đồ thị doanh thu theo thời gian
+        function renderRevenueChart() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April'],
+                    datasets: [{
+                        label: 'Revenue Over Time',
+                        data: [5000, 6000, 7000, 8000],
+                        borderColor: 'rgb(75, 192, 192)',
+                        fill: false
+                    }]
+                }
+            });
+        }
+
+        // Hàm lọc dữ liệu theo ngày
+        function filterData() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            // Ở đây có thể viết logic lọc dữ liệu theo khoảng thời gian, hoặc gọi API
+            alert(`Filtered from ${startDate} to ${endDate}`);
+        }
+
+        // Khởi tạo dữ liệu khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProductTable();
+            renderCustomerTable();
+            renderRevenueChart();
+        });
+    </script>
+</body>
+
+</html>
