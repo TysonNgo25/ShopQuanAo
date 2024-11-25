@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý người dùng</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <style> 
+    .header {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;  /* Padding trên và dưới */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  position: relative;
+}
+ footer{
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0 ;  /* Padding trên và dưới */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+}
+  </style>
+  <div class="header">
+  <h2>DANH SÁCH NGƯỜI DÙNG</h2> 
+</div>
+<div class="container mt-5">
+ 
+
+  <!-- Form thêm người dùng -->
+  <div class="form-group">
+    <input type="text" id="newUserName" class="form-control" placeholder="Tên người dùng">
+    <input type="email" id="newUserEmail" class="form-control mt-2" placeholder="Email người dùng">
+    <select id="newUserRole" class="form-control mt-2">
+      <option value="Admin">Admin</option>
+      <option value="Editor">Editor</option>
+      <option value="Merchant">Merchant</option>
+      <option value="Customer">Customer</option>
+    </select>
+    <button id="addUserBtn" class="btn btn-primary mt-2">Thêm người dùng</button>
+  </div>
+
+  <table class="table table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Vai trò</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Danh sách người dùng sẽ được render ở đây -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal chỉnh sửa người dùng -->
+<div class="modal" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa người dùng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="hidden" id="editUserId" />
+          <div class="form-group">
+            <label for="editUserName">Tên người dùng</label>
+            <input type="text" id="editUserName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="editUserEmail">Email người dùng</label>
+            <input type="email" id="editUserEmail" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="editUserRole">Vai trò</label>
+            <select id="editUserRole" class="form-control">
+              <option value="Admin">Admin</option>
+              <option value="Editor">Editor</option>
+              <option value="Merchant">Merchant</option>
+              <option value="Customer">Customer</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" id="saveEditBtn">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 Product Management. All Rights Reserved.</p>
+</footer>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Lấy danh sách người dùng từ localStorage hoặc khởi tạo mảng rỗng nếu không có
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Hiển thị danh sách người dùng
+    renderUserList();
+
+    // Thêm người dùng mới
+    $("#addUserBtn").click(function () {
+      const name = $("#newUserName").val();
+      const email = $("#newUserEmail").val();
+      const role = $("#newUserRole").val();
+
+      if (name && email && role) {
+        const newUser = {
+          id: Date.now(),
+          name: name,
+          email: email,
+          role: role,
+          isLocked: false
+        };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUserList();  // Tải lại danh sách người dùng
+        alert('Thêm người dùng thành công!');
+      } else {
+        alert('Vui lòng điền đầy đủ thông tin!');
+      }
+    });
+
+    // Xử lý khóa người dùng
+    $(document).on("click", ".lock-user", function () {
+      const userId = $(this).data('user-id');
+      lockUser(userId);
+    });
+
+    // Xử lý mở khóa người dùng
+    $(document).on("click", ".unlock-user", function () {
+      const userId = $(this).data('user-id');
+      unlockUser(userId);
+    });
+
+    // Xử lý chỉnh sửa thông tin người dùng
+    $(document).on("click", ".edit-user", function () {
+      const userId = $(this).data('user-id');
+      editUser(userId);
+    });
+
+    // Xử lý xóa người dùng
+    $(document).on("click", ".delete-user", function () {
+      const userId = $(this).data('user-id');
+      deleteUser(userId);
+    });
+
+    // Hàm khóa người dùng
+    function lockUser(userId) {
+      if (confirm("Bạn có chắc chắn muốn khóa tài khoản này?")) {
+        const user = users.find(u => u.id === userId);
+        if (user) {
+          user.isLocked = true;
+          localStorage.setItem('users', JSON.stringify(users));
+          alert('Tài khoản đã bị khóa!');
+          renderUserList();
+        }
+      }
+    }
+
+    // Hàm mở khóa người dùng
+    function unlockUser(userId) {
+      if (confirm("Bạn có chắc chắn muốn mở khóa tài khoản này?")) {
+        const user = users.find(u => u.id === userId);
+        if (user) {
+          user.isLocked = false;
+          localStorage.setItem('users', JSON.stringify(users));
+          alert('Tài khoản đã được mở khóa!');
+          renderUserList();
+        }
+      }
+    }
+
+    // Hàm chỉnh sửa thông tin người dùng
+    function editUser(userId) {
+      const user = users.find(u => u.id === userId);
+      if (user) {
+        // Hiển thị thông tin người dùng lên form để chỉnh sửa
+        $("#editUserId").val(user.id);
+        $("#editUserName").val(user.name);
+        $("#editUserEmail").val(user.email);
+        $("#editUserRole").val(user.role);
+
+        // Mở modal hoặc form chỉnh sửa
+        $('#editUserModal').modal('show');
+      }
+    }
+
+    // Lưu thông tin chỉnh sửa từ form
+    $("#saveEditBtn").click(function () {
+      const userId = $("#editUserId").val();
+      const updatedName = $("#editUserName").val();
+      const updatedEmail = $("#editUserEmail").val();
+      const updatedRole = $("#editUserRole").val();
+
+      // Cập nhật thông tin người dùng trong danh sách
+      const user = users.find(u => u.id === parseInt(userId));
+      if (user) {
+        user.name = updatedName;
+        user.email = updatedEmail;
+        user.role = updatedRole;
+
+        // Cập nhật lại localStorage
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUserList();
+        $('#editUserModal').modal('hide');
+        alert('Thông tin người dùng đã được cập nhật!');
+      }
+    });
+
+    // Hàm xóa người dùng
+    function deleteUser(userId) {
+      if (confirm("Bạn có chắc chắn muốn xóa tài khoản này?")) {
+        // Xóa người dùng khỏi mảng
+        users = users.filter(user => user.id !== userId);
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUserList();  // Tải lại danh sách người dùng
+        alert('Tài khoản đã được xóa!');
+      }
+    }
+
+    // Hàm hiển thị danh sách người dùng
+    function renderUserList() {
+      const tableBody = $("tbody");
+      tableBody.empty();  // Xóa dữ liệu cũ
+
+      // Lặp qua danh sách người dùng và tạo các dòng trong bảng
+      users.forEach(user => {
+        const userRow = `<tr>
+            <th scope="row">${user.id}</th>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+            <td><span class="badge ${user.isLocked ? 'badge-warning' : 'badge-success'}">${user.isLocked ? 'Đã khóa' : 'Đang hoạt động'}</span></td>
+            <td>
+              <a href="#" class="btn btn-info btn-sm edit-user" data-user-id="${user.id}">Sửa</a>
+              <button class="btn btn-warning btn-sm lock-user" data-user-id="${user.id}" ${user.isLocked ? 'disabled' : ''}>Khóa</button>
+              <button class="btn btn-success btn-sm unlock-user" data-user-id="${user.id}" ${!user.isLocked ? 'disabled' : ''}>Mở khóa</button>
+              <button class="btn btn-danger btn-sm delete-user" data-user-id="${user.id}">Xóa</button>
+            </td>
+          </tr>`;
+        tableBody.append(userRow);
+      });
+    }
+
+    // Khởi tạo dữ liệu mẫu (chỉ chạy lần đầu tiên nếu chưa có dữ liệu)
+    if (users.length === 0) {
+      users = [
+        { id: 1, name: 'Admin User', email: 'admin@domain.com', role: 'Admin', isLocked: false },
+        { id: 2, name: 'Editor User', email: 'editor@domain.com', role: 'Editor', isLocked: true }
+      ];
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  });
+</script>
+
+
+
+</script>
+
+</body>
+</html>
+
