@@ -12,7 +12,7 @@ html {
 }
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
-  background-color: #4e657a;
+  background-color: white;
   overflow-x: hidden;
 }
 a {
@@ -41,7 +41,7 @@ button:focus {
 }
 .navbar {
   height: 100px;
-  background-color: #567086;
+  background-color: #111111;
   padding: 0;
 }
 .navbar .container {
@@ -64,9 +64,9 @@ button:focus {
 }
 .tm-block {
   padding: 40px;
-  -webkit-box-shadow: 1px 1px 5px 0 #455c71;
-  -moz-box-shadow: 1px 1px 5px 0 #455c71;
-  box-shadow: 1px 1px 5px 0 #455c71;
+  -webkit-box-shadow: 1px 1px 5px 0 rgb(243, 242, 238);
+  -moz-box-shadow: 1px 1px 5px 0 rgb(243, 242, 238)1;
+  box-shadow: 1px 1px 5px 0 rgb(243, 242, 238);
   min-height: 350px;
   height: 100%;
   max-height: 450px;
@@ -116,7 +116,7 @@ button:focus {
 .dropdown-menu {
   font-size: 90%;
   color: #fff;
-  background-color: #567086;
+  background-color: #C8C8C8;
   border-radius: 0;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -136,7 +136,7 @@ button:focus {
 }
 .dropdown-item:focus,
 .dropdown-item:hover {
-  background-color: #567086;
+  background-color:rgb(243, 242, 238);
 }
 .navbar-nav a:hover,
 .navbar-nav a:hover i {
@@ -184,7 +184,7 @@ button:focus {
 }
 .tm-notification-item {
   padding: 15px;
-  background-color: #4e657a;
+  background-color: rgb(243, 242, 238);
   color: #fff;
   font-size: 95%;
   margin-bottom: 15px;
@@ -202,14 +202,14 @@ button:focus {
   font-size: 90%;
 }
 .table {
-  background-color: #50697f;
-  color: #fff;
+  background-color: rgb(243, 242, 238);
+  color: black;
   font-size: 85%;
   margin-bottom: 0;
 }
 thead {
-  background-color: #486177;
-  color: #fff;
+  background-color: rgb(220,220,220);
+  color: black;
 }
 .table thead th {
   border-bottom: 0;
@@ -254,7 +254,7 @@ thead {
   z-index: 1000;
   padding: 14px;
   border-radius: 50%;
-  background-color: rgba(57, 78, 100, 0.7);
+  background-color: rgb(220,220,220);
   display: inline-block;
   width: 50px;
   height: 50px;
@@ -278,12 +278,12 @@ thead {
   padding-right: 15px;
 }
 .form-control {
-  background-color: #54657d;
+  background-color: rgb(192,192,192);
   color: #fff;
   border: 0;
 }
 .form-control:focus {
-  background-color: #60738e;
+  background-color: rgb(211,211,211);
   color: #fff;
   border-color: transparent;
   box-shadow: 0 0 0 0.1rem rgb(180, 206, 233, 0.5);
@@ -358,7 +358,7 @@ thead {
 }
 .table td,
 .table th {
-  border-top: 1px solid #415a70;
+  border-top: 1px solid rgb(243, 242, 238);
   padding: 15px 25px;
   vertical-align: middle;
 }
@@ -374,7 +374,7 @@ thead {
   color: #a0c0de;
 }
 .tm-bg-primary-dark {
-  background-color: #435c70;
+  background-color: rgb(119,136,153);
 }
 .tm-bg-gray {
   background-color: rgba(0, 0, 0, 0.05);
@@ -412,7 +412,7 @@ input[type="checkbox"] {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #394e64;
+  background-color: rgb(243, 242, 238);
   background-position: center;
   border-radius: 50%;
   box-sizing: border-box;
@@ -454,7 +454,7 @@ input[type="checkbox"]:focus {
 .tm-product-delete-link {
   padding: 10px;
   border-radius: 50%;
-  background-color: #394e64;
+  background-color: rgb(220,220,220);
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -492,7 +492,7 @@ input[type="checkbox"]:focus {
   color: #9f1321;
 }
 .tm-footer {
-  background-color: #567086;
+  background-color:#111111;
   padding-top: 30px;
   padding-bottom: 30px;
   -webkit-box-shadow: 0 -3px 5px 0 rgba(69, 92, 113, 0.59);
@@ -524,7 +524,7 @@ input[type="checkbox"]:focus {
   display: block;
 }
 .tm-upload-icon {
-  background: #455c71;
+  background: rgb(220,220,220);
   width: 55px;
   height: 55px;
   border-radius: 50%;
