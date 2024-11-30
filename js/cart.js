@@ -189,6 +189,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Xử lý logic khi nhấn nút "PLACE ORDER"
   const placeOrderBtn = document.querySelector(".place-order-btn");
   placeOrderBtn.addEventListener("click", function () {
+    // Hiển thị thông báo xác nhận
+    const confirmPayment = confirm("Bạn có muốn thanh toán không?");
+
+    if (!confirmPayment) {
+      return; // Nếu người dùng không xác nhận, dừng hành động
+    }
+
     // Lấy phương thức thanh toán đã được chọn
     const selectedMethod = document.querySelector(
       'input[name="payment-method"]:checked'
@@ -198,10 +205,10 @@ document.addEventListener("DOMContentLoaded", function () {
       // Kiểm tra xem người dùng đã nhập mã tham chiếu chuyển khoản chưa
       const reference = document.getElementById("bank-reference").value;
       if (!reference) {
-        alert("Please provide a reference number for the bank transfer."); // Thông báo nếu mã tham chiếu còn thiếu
+        alert("Please provide a reference number for the bank transfer.");
         return;
       }
-      alert("Your bank transfer order has been placed!"); // Thông báo khi hoàn thành đặt hàng qua chuyển khoản
+      alert("Your bank transfer order has been placed!");
     } else if (selectedMethod === "card") {
       // Lấy thông tin thẻ từ form
       const cardNumber = document.getElementById("card-number").value;
@@ -211,13 +218,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Kiểm tra xem người dùng đã nhập đầy đủ thông tin thẻ chưa
       if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
-        alert("Please provide complete card information."); // Thông báo nếu thiếu thông tin thẻ
+        alert("Please provide complete card information.");
         return;
       }
-      alert("Your card payment has been processed!"); // Thông báo khi thanh toán qua thẻ thành công
+      alert("Your card payment has been processed!");
     } else {
       // Xử lý khi chọn thanh toán bằng tiền mặt
-      alert("Your cash payment order has been placed!"); // Thông báo khi đặt hàng bằng tiền mặt
+      alert("Your cash payment order has been placed!");
     }
   });
 
