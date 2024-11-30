@@ -70,7 +70,7 @@
           <div class="row">
             <div class="col-lg-6 col-md-7">
               <div class="header__top__left">
-                <p>Free shipping, 30-day return or refund guarantee.</p>
+                <p>Free shipping, 30-day return or refunad guarantee.</p>
               </div>
             </div>
             <div class="col-lg-6 col-md-5">
@@ -164,7 +164,8 @@
               <div class="shop__sidebar__search">
                 <form action="#">
                   <input type="text" placeholder="Search..." />
-                  <button type="submit">
+
+                  <button type="button" onclick="location.href='jacket.html';">
                     <span class="icon_search"></span>
                   </button>
                 </form>
@@ -444,7 +445,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-2.html"
                           ><img src="img/icon/search.png" alt=""
@@ -489,8 +490,8 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      <li>
-                        
+                      <li></li>
+
                       <li>
                         <a href="shop-details-3.html"
                           ><img src="img/icon/search.png" alt=""
@@ -536,7 +537,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-4.html"
                           ><img src="img/icon/search.png" alt=""
@@ -581,7 +582,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-5.html"
                           ><img src="img/icon/search.png" alt=""
@@ -626,7 +627,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-6.html"
                           ><img src="img/icon/search.png" alt=""
@@ -671,7 +672,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-7.html"
                           ><img src="img/icon/search.png" alt=""
@@ -717,7 +718,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-8.html"
                           ><img src="img/icon/search.png" alt=""
@@ -762,7 +763,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-9.html"
                           ><img src="img/icon/search.png" alt=""
@@ -808,7 +809,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-10.html"
                           ><img src="img/icon/search.png" alt=""
@@ -853,7 +854,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                      
+
                       <li>
                         <a href="shop-details-11.html"
                           ><img src="img/icon/search.png" alt=""
@@ -898,7 +899,7 @@
                       <li>
                         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
                       </li>
-                     
+
                       <li>
                         <a href="shop-details-12.html"
                           ><img src="img/icon/search.png" alt=""
@@ -1032,11 +1033,18 @@
     <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-          <input type="text" id="search-input" placeholder="Search here....." />
+        <form class="search-model-form" action="jacket.html" method="get">
+          <input
+            type="text"
+            id="search-input"
+            name="query"
+            placeholder="Search here....."
+          />
+          <button type="submit">Search</button>
         </form>
       </div>
     </div>
+
     <!-- Search End -->
 
     <!-- Js Plugins -->
