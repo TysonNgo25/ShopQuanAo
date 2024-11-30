@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartTableBody = document.querySelector(
       ".shopping__cart__table tbody"
     );
+    const cartSubtotal=document.querySelector(
+      ".cart__total ul li:nth-last-child(2) span"
+    );
     const cartTotal = document.querySelector(
       ".cart__total ul li:last-child span"
     );
@@ -16,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <td colspan="4" class="text-center">Your cart is empty!</td>
         </tr>`;
       if (cartTotal) cartTotal.textContent = "$0.00";
+     
       return;
     }
 
@@ -48,12 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
         </tr>`
       )
       .join("");
-
+    
     const totalPrice = cart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
+    const subtotalPrice= totalPrice;
     if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+    if(cartSubtotal) cartSubtotal.textContent=`$${subtotalPrice.toFixed(2)}`;
   }
 
   // Thêm sản phẩm vào giỏ hàng
