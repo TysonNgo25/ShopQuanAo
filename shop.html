@@ -70,7 +70,7 @@
           <div class="row">
             <div class="col-lg-6 col-md-7">
               <div class="header__top__left">
-                <p>Free shipping, 30-day return or refund guarantee.</p>
+                <p>Free shipping, 30-day return or refunad guarantee.</p>
               </div>
             </div>
             <div class="col-lg-6 col-md-5">
@@ -163,12 +163,17 @@
             <div class="shop__sidebar">
               <div class="shop__sidebar__search">
                 <form action="#">
-                  <input type="text" placeholder="Search..." />
-
-                  <button type="button" onclick="location.href='jacket.html';">
+                  <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()" />
+                  <button type="button">
                     <span class="icon_search"></span>
                   </button>
                 </form>
+                
+                <!-- Khu vực hiển thị kết quả tìm kiếm -->
+                <div id="searchResults" style="display:none;">
+                  <div id="searchResultsList"></div>
+                </div>
+                
               </div>
               <div class="shop__sidebar__accordion">
                 <div class="accordion" id="accordionExample">
@@ -389,6 +394,10 @@
                 </div>
               </div>
             </div>
+
+            
+
+
             <div class="row">
               <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
@@ -479,7 +488,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
               <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="product__item">
                   <div
@@ -499,6 +508,7 @@
                       </li>
                     </ul>
                   </div>
+      
                   <div class="product__item__text">
                     <h6>Brown Hooded Shirt Jacket</h6>
                     <a href="#" class="add-cart" onclick="addToCart()"
@@ -1033,17 +1043,26 @@
     <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form" action="jacket.html" method="get">
+        <form class="search-model-form">
           <input
             type="text"
-            id="search-input"
+            id="search-input"  
             name="query"
             placeholder="Search here....."
+            oninput="searchProducts()" 
           />
-          <button type="submit">Search</button>
         </form>
       </div>
     </div>
+    
+    <div class="search-results" id="search-results">
+      <div id="searchResultsList"> 
+      </div>
+    </div>
+    
+    
+    
+    
 
     <!-- Search End -->
 
@@ -1060,5 +1079,7 @@
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/test.js"></script>
+    <script src="js/thanhtimkiemotren.js"></script>
   </body>
 </html>
