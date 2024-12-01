@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartTableBody = document.querySelector(
       ".shopping__cart__table tbody"
     );
-    const cartSubtotal=document.querySelector(
+    const cartSubtotal = document.querySelector(
       ".cart__total ul li:nth-last-child(2) span"
     );
     const cartTotal = document.querySelector(
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <td colspan="4" class="text-center">Your cart is empty!</td>
         </tr>`;
       if (cartTotal) cartTotal.textContent = "$0.00";
-     
+
       return;
     }
 
@@ -52,14 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
         </tr>`
       )
       .join("");
-    
+
     const totalPrice = cart.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
-    const subtotalPrice= totalPrice;
+    const subtotalPrice = totalPrice;
     if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
-    if(cartSubtotal) cartSubtotal.textContent=`$${subtotalPrice.toFixed(2)}`;
+    if (cartSubtotal) cartSubtotal.textContent = `$${subtotalPrice.toFixed(2)}`;
   }
 
   // Thêm sản phẩm vào giỏ hàng
@@ -206,6 +206,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedMethod = document.querySelector(
       'input[name="payment-method"]:checked'
     ).value;
+
+    const recipient = document.getElementById("first-name").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+
+    // Kiểm tra xem người dùng đã điền đầy đủ thông tin giao hàng chưa
+    if (!recipient || !phone || !address) {
+      alert("Vui lòng điền đầy đủ thông tin giao hàng.");
+      return;
+    }
+
+    // Lưu thông tin giao hàng vào localStorage
+    const orderDetails = {
+      recipient: recipient,
+      phone: phone,
+      address: address,
+      paymentMethod: selectedMethod,
+    };
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
 
     if (selectedMethod === "transfer") {
       // Kiểm tra xem người dùng đã nhập mã tham chiếu chuyển khoản chưa
