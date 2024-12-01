@@ -54,6 +54,7 @@ function checkLoginStatus() {
         <span>${loggedInUser}</span>
         <ul class="user-options">
           <li><a href="profile.html">Profile</a></li>
+           
           <li><button onclick="logout()" style="border:none; background:none; color:white; cursor:pointer;">Log Out</button></li>
         </ul>
       </div>
