@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
       0
     );
     const subtotalPrice = totalPrice;
+    const totalElement = document.getElementById("total");
+    if (totalElement) totalElement.textContent = `$${totalPrice.toFixed(2)}`;
     if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
     if (cartSubtotal) cartSubtotal.textContent = `$${subtotalPrice.toFixed(2)}`;
   }
@@ -91,26 +93,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Xử lý cập nhật số lượng và xóa sản phẩm trong giỏ hàng
   const cartTableBody = document.querySelector(".shopping__cart__table tbody");
+
   if (cartTableBody) {
     cartTableBody.addEventListener("click", function (e) {
       const target = e.target;
       const index = target.dataset.index;
-
+  
+      // Xử lý khi người dùng nhấn nút "remove-btn"
       if (target.classList.contains("remove-btn")) {
-        cart.splice(index, 1);
-      } else if (target.classList.contains("qty-btn")) {
+        // Hiển thị hộp thoại xác nhận trước khi xóa
+        const confirmDelete = confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
+        if (confirmDelete) {
+          // Nếu người dùng nhấn "OK", xóa sản phẩm khỏi giỏ hàng
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartUI(); // Cập nhật lại giao diện giỏ hàng
+        } else {
+          // Nếu người dùng nhấn "Cancel", không làm gì
+          console.log("Sản phẩm không bị xóa.");
+        }
+      }
+  
+      // Xử lý khi người dùng nhấn nút tăng giảm số lượng
+      else if (target.classList.contains("qty-btn")) {
         const action = target.dataset.action;
         if (action === "increase") {
           cart[index].quantity++;
         } else if (action === "decrease" && cart[index].quantity > 1) {
           cart[index].quantity--;
         }
+  
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartUI();
       }
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartUI();
     });
   }
+  
 
   // Hiển thị giỏ hàng trên trang shopping-cart.html
   if (window.location.pathname.includes("shopping-cart.html")) {
