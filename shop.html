@@ -6,7 +6,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Male-Fashion | Template</title>
+    <title>Male-Fashion | Nhóm 5TL</title>
 
     <!-- Google Font -->
     <link
@@ -49,7 +49,9 @@
         </div>
       </div>
       <div class="offcanvas__nav__option">
-        <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()">
+        <a href="#" class="search-switch"
+          ><img src="img/icon/search.png" alt=""
+        /></a>
         <a href="#"><img src="img/icon/heart.png" alt="" /></a>
         <a href="shopping-cart.html"><img src="img/icon/cart.png" alt="" /> <span>0</span></a>
         <div class="price">$0.00</div>
@@ -119,9 +121,13 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-
-              <a href="#"><img src="img/icon/heart.png" alt=""></a>
-              <a href="./shopping-cart.html"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+              <a href="#" class="search-switch"
+                ><img src="img/icon/search.png" alt=""
+              /></a>
+              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+              <a href="./shopping-cart.html"
+                ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
+              >
               <div class="price">$0.00</div>
             </div>
           </div>
@@ -157,11 +163,16 @@
             <div class="shop__sidebar">
               <div class="shop__sidebar__search">
                 <form action="#">
-                  <input type="text" id="searchInputHome" placeholder="Search..." onkeyup="searchProducts()" />
+                  <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()" />
                   <button type="button">
                     <span class="icon_search"></span>
                   </button>
                 </form>
+                
+                <!-- Khu vực hiển thị kết quả tìm kiếm -->
+                <div id="searchResults" style="display:none;">
+                  <div id="searchResultsList"></div>
+                </div>
                 
               </div>
               <div class="shop__sidebar__accordion">
@@ -384,13 +395,556 @@
               </div>
             </div>
 
+            
 
 
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-2.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+                      <li>
+                        <a href="shop-details-1.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Piqué Biker Jacket</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$67.24</h5>
+                    <div class="product__color__select">
+                      <label for="pc-4">
+                        <input type="radio" id="pc-4" />
+                      </label>
+                      <label class="active black" for="pc-5">
+                        <input type="radio" id="pc-5" />
+                      </label>
+                      <label class="grey" for="pc-6">
+                        <input type="radio" id="pc-6" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item sale">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-3.jpg"
+                  >
+                    <span class="label">Sale</span>
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
 
-            <div id="product-container" class="row">
+                      <li>
+                        <a href="shop-details-2.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Black Sneaker</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$43.48</h5>
+                    <div class="product__color__select">
+                      <label for="pc-7">
+                        <input type="radio" id="pc-7" />
+                      </label>
+                      <label class="active black" for="pc-8">
+                        <input type="radio" id="pc-8" />
+                      </label>
+                      <label class="grey" for="pc-9">
+                        <input type="radio" id="pc-9" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-4.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+                      <li></li>
 
+                      <li>
+                        <a href="shop-details-3.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+      
+                  <div class="product__item__text">
+                    <h6>Brown Hooded Shirt Jacket</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$60.9</h5>
+                    <div class="product__color__select">
+                      <label for="pc-10">
+                        <input type="radio" id="pc-10" />
+                      </label>
+                      <label class="active black" for="pc-11">
+                        <input type="radio" id="pc-11" />
+                      </label>
+                      <label class="grey" for="pc-12">
+                        <input type="radio" id="pc-12" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item sale">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-6.jpg"
+                  >
+                    <span class="label">Sale</span>
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-4.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Gray Fringed Scarf</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$98.49</h5>
+                    <div class="product__color__select">
+                      <label for="pc-16">
+                        <input type="radio" id="pc-16" />
+                      </label>
+                      <label class="active black" for="pc-17">
+                        <input type="radio" id="pc-17" />
+                      </label>
+                      <label class="grey" for="pc-18">
+                        <input type="radio" id="pc-18" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-7.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-5.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Brown Leather Backpack</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$49.66</h5>
+                    <div class="product__color__select">
+                      <label for="pc-19">
+                        <input type="radio" id="pc-19" />
+                      </label>
+                      <label class="active black" for="pc-20">
+                        <input type="radio" id="pc-20" />
+                      </label>
+                      <label class="grey" for="pc-21">
+                        <input type="radio" id="pc-21" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-8.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-6.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Navy Henley T-shirt</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$26.28</h5>
+                    <div class="product__color__select">
+                      <label for="pc-22">
+                        <input type="radio" id="pc-22" />
+                      </label>
+                      <label class="active black" for="pc-23">
+                        <input type="radio" id="pc-23" />
+                      </label>
+                      <label class="grey" for="pc-24">
+                        <input type="radio" id="pc-24" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-9.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-7.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Black Floral Graphic T-shirt</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$67.24</h5>
+                    <div class="product__color__select">
+                      <label for="pc-25">
+                        <input type="radio" id="pc-25" />
+                      </label>
+                      <label class="active black" for="pc-26">
+                        <input type="radio" id="pc-26" />
+                      </label>
+                      <label class="grey" for="pc-27">
+                        <input type="radio" id="pc-27" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item sale">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-10.jpg"
+                  >
+                    <span class="label">Sale</span>
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-8.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Perfume Set</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$43.48</h5>
+                    <div class="product__color__select">
+                      <label for="pc-28">
+                        <input type="radio" id="pc-28" />
+                      </label>
+                      <label class="active black" for="pc-29">
+                        <input type="radio" id="pc-29" />
+                      </label>
+                      <label class="grey" for="pc-30">
+                        <input type="radio" id="pc-30" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-11.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-9.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>White Utility Backpack</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$60.9</h5>
+                    <div class="product__color__select">
+                      <label for="pc-31">
+                        <input type="radio" id="pc-31" />
+                      </label>
+                      <label class="active black" for="pc-32">
+                        <input type="radio" id="pc-32" />
+                      </label>
+                      <label class="grey" for="pc-33">
+                        <input type="radio" id="pc-33" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item sale">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-12.jpg"
+                  >
+                    <span class="label">Sale</span>
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-10.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Camouflage Hooded Jacket</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$98.49</h5>
+                    <div class="product__color__select">
+                      <label for="pc-34">
+                        <input type="radio" id="pc-34" />
+                      </label>
+                      <label class="active black" for="pc-35">
+                        <input type="radio" id="pc-35" />
+                      </label>
+                      <label class="grey" for="pc-36">
+                        <input type="radio" id="pc-36" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-13.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-11.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Brown Leather Briefcase</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$49.66</h5>
+                    <div class="product__color__select">
+                      <label for="pc-37">
+                        <input type="radio" id="pc-37" />
+                      </label>
+                      <label class="active black" for="pc-38">
+                        <input type="radio" id="pc-38" />
+                      </label>
+                      <label class="grey" for="pc-39">
+                        <input type="radio" id="pc-39" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="img/product/product-14.jpg"
+                  >
+                    <ul class="product__hover">
+                      <li>
+                        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                      </li>
+
+                      <li>
+                        <a href="shop-details-12.html"
+                          ><img src="img/icon/search.png" alt=""
+                        /></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6>Gold Rectangular Cufflinks</h6>
+                    <a href="#" class="add-cart" onclick="addToCart()"
+                      >+ Add To Cart</a
+                    >
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>$26.28</h5>
+                    <div class="product__color__select">
+                      <label for="pc-40">
+                        <input type="radio" id="pc-40" />
+                      </label>
+                      <label class="active black" for="pc-41">
+                        <input type="radio" id="pc-41" />
+                      </label>
+                      <label class="grey" for="pc-42">
+                        <input type="radio" id="pc-42" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
             <div class="row">
               <div class="col-lg-12">
                 <div class="product__pagination">
@@ -525,154 +1079,7 @@
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/searchbarbentrai.js"></script>
+    <script src="js/test.js"></script>
     <script src="js/thanhtimkiemotren.js"></script>
   </body>
 </html>
-
-<script>
-
-
-  const productContainer = document.getElementById("product-container");
-
-  // Lặp qua mảng products và tạo HTML
-  products.forEach((product) => {
-    // Tạo div chứa sản phẩm
-    const productItem = document.createElement("div");
-    productItem.classList.add("col-lg-4", "col-md-6", "col-sm-6");
-
-    // Nội dung HTML cho mỗi sản phẩm
-    productItem.innerHTML = `
-      <div class="product__item">
-        <div
-          class="product__item__pic set-bg"
-          style="background-image: url('${product.image}');"
-        >
-          <ul class="product__hover">
-            <li>
-              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="${product.link}">
-                <img src="img/icon/search.png" alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="product__item__text">
-          <h6>${product.name}</h6>
-          <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
-          <div class="rating">
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <h5>${product.price}</h5>
-          <div class="product__color__select">
-            <label for="pc-4">
-              <input type="radio" id="pc-4" />
-            </label>
-            <label class="active black" for="pc-5">
-              <input type="radio" id="pc-5" />
-            </label>
-            <label class="grey" for="pc-6">
-              <input type="radio" id="pc-6" />
-            </label>
-          </div>
-        </div>
-      </div>
-    `;
-
-    // Chèn sản phẩm vào container
-    productContainer.appendChild(productItem);
-  });
-
-
-  // Lặp qua mảng sản phẩm và hiển thị sản phẩm
-  function displayProducts(productsToDisplay) {
-    const productContainer = document.getElementById("product-container");
-    productContainer.innerHTML = ""; // Xóa các sản phẩm cũ
-
-    productsToDisplay.forEach((product) => {
-      const productItem = document.createElement("div");
-      productItem.classList.add("col-lg-4", "col-md-6", "col-sm-6");
-
-      productItem.innerHTML = `
-      <div class="product__item">
-        <div
-          class="product__item__pic set-bg"
-          style="background-image: url('${product.image}');"
-        >
-          <ul class="product__hover">
-            <li>
-              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="${product.link}">
-                <img src="img/icon/search.png" alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="product__item__text">
-          <h6>${product.name}</h6>
-          <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
-          <div class="rating">
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <h5>${product.price}</h5>
-          <div class="product__color__select">
-            <label for="pc-4">
-              <input type="radio" id="pc-4" />
-            </label>
-            <label class="active black" for="pc-5">
-              <input type="radio" id="pc-5" />
-            </label>
-            <label class="grey" for="pc-6">
-              <input type="radio" id="pc-6" />
-            </label>
-          </div>
-        </div>
-      </div>
-    `;
-      productContainer.appendChild(productItem);
-    });
-  }
-
-  // Hiển thị toàn bộ sản phẩm ban đầu
-  displayProducts(products);
-
-  // Tìm kiếm sản phẩm theo từ khóa
-  function searchProducts() {
-    const searchInput = document
-            .getElementById("searchInputHome")
-            .value.toLowerCase();
-
-    const filteredProducts = products.filter((product) => {
-      const productName = product.name.toLowerCase();
-      const productPrice = parseFloat(product.price.replace("$", "")); // Lấy giá trị số từ chuỗi
-
-      // Kiểm tra nếu từ khóa khớp với tên sản phẩm hoặc giá
-      return (
-              productName.includes(searchInput) || productPrice.toString().includes(searchInput)
-      );
-    });
-
-    // Hiển thị lại danh sách sản phẩm đã lọc
-    displayProducts(filteredProducts);
-  }
-
-
-  // Hàm thêm sản phẩm vào giỏ hàng (để minh họa)
-  function addToCart() {
-    alert("Added to cart!");
-  }
-
-
-</script>
