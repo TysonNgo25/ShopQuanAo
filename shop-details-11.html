@@ -23,6 +23,32 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <style>
+      body, html {
+          height: 100%; /* Đảm bảo chiều cao của body và html chiếm toàn bộ chiều cao cửa sổ */
+        
+      }
+
+      .khung {
+          display: flex;
+          justify-content: center; /* Canh giữa theo chiều ngang */
+          
+         
+      }
+
+      .buttonn {
+          padding: 10px 20px;
+          background-color: black;
+          color:white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .buttonn:hover {
+          background-color: gray;
+      }
+  </style>
   </head>
 
   <body>
@@ -196,9 +222,11 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
               <div class="product__details__text">
+                <div class="set-bg" data-setbg="img/product/product-13.jpg"></div>
+
                 <h4>Brown Leather Briefcase</h4>
                 
-                <h3>$49,66 <span>100.00</span></h3>
+                <h3>$49.66 <span>100.00</span></h3>
                 <p>
                   The "brown leather briefcase" is a sophisticated, professional
                   accessory, crafted from high-quality leather in a rich brown
@@ -213,56 +241,15 @@
                   briefcase ideal for business professionals seeking a blend of
                   functionality and classic style.
                 </p>
-                <div class="product__details__option">
-                  <div class="product__details__option__size">
-                    <span>Size:</span>
-                    <label for="xxl"
-                      >xxl
-                      <input type="radio" id="xxl" />
-                    </label>
-                    <label class="active" for="xl"
-                      >xl
-                      <input type="radio" id="xl" />
-                    </label>
-                    <label for="l"
-                      >l
-                      <input type="radio" id="l" />
-                    </label>
-                    <label for="sm"
-                      >s
-                      <input type="radio" id="sm" />
-                    </label>
-                  </div>
-                  <div class="product__details__option__color">
-                    <span>Color:</span>
-                    <label class="c-1" for="sp-1">
-                      <input type="radio" id="sp-1" />
-                    </label>
-                    <label class="c-2" for="sp-2">
-                      <input type="radio" id="sp-2" />
-                    </label>
-                    <label class="c-3" for="sp-3">
-                      <input type="radio" id="sp-3" />
-                    </label>
-                    <label class="c-4" for="sp-4">
-                      <input type="radio" id="sp-4" />
-                    </label>
-                    <label class="c-9" for="sp-9">
-                      <input type="radio" id="sp-9" />
-                    </label>
-                  </div>
-                </div>
-                <div class="product__details__cart__option">
-                  <div class="quantity">
-                    <div class="pro-qty">
-                      <input type="text" value="1" />
-                    </div>
-                  </div>
-                  <a href="#" class="primary-btn">add to cart</a>
-                </div>
-                <div class="product__details__btns__option">
+                
              
                 </div>
+                <div class="khung">
+                  <a href="#" 
+                    class="buttonn"
+                     data-price="49.66">Add To Cart</a>
+                </div>
+                <br>
                 <div class="product__details__last__option">
                   <h5><span>Guaranteed Safe Checkout</span></h5>
                   <img src="img/shop-details/details-payment.png" alt="" />
@@ -450,26 +437,10 @@
               </div>
               <div class="product__item__text">
                 <h6>Piqué Biker Jacket</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
-                <div class="rating">
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                </div>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
+              
                 <h5>$67.24</h5>
-                <div class="product__color__select">
-                  <label for="pc-1">
-                    <input type="radio" id="pc-1" />
-                  </label>
-                  <label class="active black" for="pc-2">
-                    <input type="radio" id="pc-2" />
-                  </label>
-                  <label class="grey" for="pc-3">
-                    <input type="radio" id="pc-3" />
-                  </label>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -489,26 +460,10 @@
               </div>
               <div class="product__item__text">
                 <h6>Piqué Biker Jacket</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
-                <div class="rating">
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                  <i class="fa fa-star-o"></i>
-                </div>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
+               
                 <h5>$67.24</h5>
-                <div class="product__color__select">
-                  <label for="pc-4">
-                    <input type="radio" id="pc-4" />
-                  </label>
-                  <label class="active black" for="pc-5">
-                    <input type="radio" id="pc-5" />
-                  </label>
-                  <label class="grey" for="pc-6">
-                    <input type="radio" id="pc-6" />
-                  </label>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -529,20 +484,10 @@
               </div>
               <div class="product__item__text">
                 <h6>Multi-pocket Chest Bag</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
             
                 <h5>$43.48</h5>
-                <div class="product__color__select">
-                  <label for="pc-7">
-                    <input type="radio" id="pc-7" />
-                  </label>
-                  <label class="active black" for="pc-8">
-                    <input type="radio" id="pc-8" />
-                  </label>
-                  <label class="grey" for="pc-9">
-                    <input type="radio" id="pc-9" />
-                  </label>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -561,20 +506,10 @@
               </div>
               <div class="product__item__text">
                 <h6>Diagonal Textured Cap</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
               
                 <h5>$60.9</h5>
-                <div class="product__color__select">
-                  <label for="pc-10">
-                    <input type="radio" id="pc-10" />
-                  </label>
-                  <label class="active black" for="pc-11">
-                    <input type="radio" id="pc-11" />
-                  </label>
-                  <label class="grey" for="pc-12">
-                    <input type="radio" id="pc-12" />
-                  </label>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -683,5 +618,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+
   </body>
 </html>

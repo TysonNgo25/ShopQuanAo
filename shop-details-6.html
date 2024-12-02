@@ -23,6 +23,32 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <style>
+      body, html {
+          height: 100%; /* Đảm bảo chiều cao của body và html chiếm toàn bộ chiều cao cửa sổ */
+        
+      }
+
+      .khung {
+          display: flex;
+          justify-content: center; /* Canh giữa theo chiều ngang */
+          
+         
+      }
+
+      .buttonn {
+          padding: 10px 20px;
+          background-color: black;
+          color:white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .buttonn:hover {
+          background-color: gray;
+      }
+  </style>
   </head>
 
   <body>
@@ -196,6 +222,8 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
               <div class="product__details__text">
+                <div class="set-bg" data-setbg="img/product/product-8.jpg"></div>
+
                 <h4>Navy Henley T-shirt</h4>
                 
                 <h3>$26.28 <span>100.00</span></h3>
@@ -211,15 +239,15 @@
                   choice for everyday wear. Its simple yet stylish design suits
                   both relaxed and slightly dressier casual settings.
                 </p>
+              </div>
+              <div class="khung">
+                <a href="#" 
+                  class="buttonn"
+                   data-price="26.28">Add To Cart</a>
+              </div>
+              <br>
                 
-                <div class="product__details__cart__option">
-                  <div class="quantity">
-                    <div class="pro-qty">
-                      <input type="text" value="1" />
-                    </div>
-                  </div>
-                  <a href="#" class="primary-btn">add to cart</a>
-                </div>                
+                           
                 
                 
                   <h5><span>Guaranteed Safe Checkout</span></h5>
@@ -404,7 +432,7 @@
               </div>
               <div class="product__item__text">
                 <h6>Piqué Biker Jacket</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
              
                 <h5>$67.24</h5>
               
@@ -426,7 +454,7 @@
               </div>
               <div class="product__item__text">
                 <h6>Piqué Biker Jacket</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
                 
                 <h5>$67.24</h5>
                
@@ -450,20 +478,10 @@
               </div>
               <div class="product__item__text">
                 <h6>Multi-pocket Chest Bag</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
              
                 <h5>$43.48</h5>
-                <div class="product__color__select">
-                  <label for="pc-7">
-                    <input type="radio" id="pc-7" />
-                  </label>
-                  <label class="active black" for="pc-8">
-                    <input type="radio" id="pc-8" />
-                  </label>
-                  <label class="grey" for="pc-9">
-                    <input type="radio" id="pc-9" />
-                  </label>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -483,7 +501,7 @@
               </div>
               <div class="product__item__text">
                 <h6>Diagonal Textured Cap</h6>
-                <a href="#" class="add-cart">+ Add To Cart</a>
+                <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
                 
                 <h5>$60.9</h5>
                
@@ -595,5 +613,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+
   </body>
 </html>
