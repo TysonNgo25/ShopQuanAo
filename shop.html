@@ -50,7 +50,6 @@
       </div>
       <div class="offcanvas__nav__option">
         <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()">
-        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
         <a href="shopping-cart.html"><img src="img/icon/cart.png" alt="" /> <span>0</span></a>
         <div class="price">$0.00</div>
       </div>
@@ -120,7 +119,6 @@
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
 
-              <a href="#"><img src="img/icon/heart.png" alt=""></a>
               <a href="./shopping-cart.html"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
               <div class="price">$0.00</div>
             </div>
@@ -389,12 +387,11 @@
       <div class="product__item">
         <div
           class="product__item__pic set-bg"
+          data-setbg="${product.image}"
           style="background-image: url('${product.image}');"
         >
           <ul class="product__hover">
-            <li>
-              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
-            </li>
+          
             <li>
               <a href="${product.link}">
                 <img src="img/icon/search.png" alt="" />
@@ -405,25 +402,9 @@
         <div class="product__item__text">
           <h6>${product.name}</h6>
           <a href="#" class="add-cart" onclick="addToCart()">+ Add To Cart</a>
-          <div class="rating">
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
+         
           <h5>${product.price}</h5>
-          <div class="product__color__select">
-            <label for="pc-4">
-              <input type="radio" id="pc-4" />
-            </label>
-            <label class="active black" for="pc-5">
-              <input type="radio" id="pc-5" />
-            </label>
-            <label class="grey" for="pc-6">
-              <input type="radio" id="pc-6" />
-            </label>
-          </div>
+          
         </div>
       </div>
     `;
@@ -446,12 +427,11 @@
       <div class="product__item">
         <div
           class="product__item__pic set-bg"
+          data-setbg="${product.image}"
           style="background-image: url('${product.image}');"
         >
           <ul class="product__hover">
-            <li>
-              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
-            </li>
+           
             <li>
               <a href="${product.link}">
                 <img src="img/icon/search.png" alt="" />
@@ -496,10 +476,8 @@
   }
 
 
-  // Hàm thêm sản phẩm vào giỏ hàng (để minh họa)
-  function addToCart() {
-    alert("Added to cart!");
-  }
+  
+ 
 
 
 </script>
