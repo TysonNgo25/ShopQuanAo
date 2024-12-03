@@ -3896,3 +3896,8 @@ ol {
     height: 250px;
   }
 }
+/* Mặc định không có định dạng đặc biệt */
+a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

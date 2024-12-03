@@ -84,3 +84,13 @@ const products = [
     category: "accessories",
   },
 ];
+function highlightLink(link) {
+  // Xóa lớp 'active' khỏi tất cả các liên kết
+  const links = document.querySelectorAll('a');
+  links.forEach(function(link) {
+    link.classList.remove('active');
+  });
+  
+  // Thêm lớp 'active' vào liên kết vừa được click
+  link.classList.add('active');
+}
