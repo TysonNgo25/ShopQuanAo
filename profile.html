@@ -24,24 +24,100 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/login.css" type="text/css" />
-
+    <link rel="stylesheet" href="css/profile.css" type="text/css" />
     <style>
-      /* Định dạng nút login */
-      .field input[type="button"] {
-        background-color: #000; /* Màu đen ban đầu */
-        color: #fff; /* Màu chữ trắng */
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+      /* Container của phần Profile */
+      .profile {
+        margin: 50px auto;
+        max-width: 600px;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       }
 
-      /* Hiệu ứng hover */
-      .field input[type="button"]:hover {
-        background-color: #0d8b09; /* Màu xanh khi di chuột */
-        color: #fff; /* Đảm bảo chữ vẫn màu trắng */
+      /* Tiêu đề của Profile */
+      .profile h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #222;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      /* Thông tin người dùng */
+      .profile-info {
+        text-align: left;
+        font-size: 1.2rem;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      .profile-info p {
+        margin: 10px 0;
+      }
+
+      .profile-info strong {
+        color: #333;
+        font-weight: 600;
+      }
+
+      /* Hiệu ứng bo tròn và viền nhẹ */
+      .profile-card {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+      }
+
+      /* Nút hành động */
+      .profile-actions {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .profile-actions button {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .profile-actions .edit-btn {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .profile-actions .edit-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .profile-actions .logout-btn {
+        background-color: #dc3545;
+        color: #fff;
+      }
+
+      .profile-actions .logout-btn:hover {
+        background-color: #a71d2a;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .profile {
+          padding: 20px;
+          margin: 20px auto;
+        }
+
+        .profile h1 {
+          font-size: 2rem;
+        }
+
+        .profile-info p {
+          font-size: 1rem;
+        }
       }
     </style>
   </head>
@@ -73,8 +149,10 @@
         <a href="#" class="search-switch"
           ><img src="img/icon/search.png" alt=""
         /></a>
-        
-        <a href="shopping-cart.html"><img src="img/icon/cart.png" alt="" /> <span>0</span></a>
+        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+        <a href="shopping-cart.html"
+          ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
+        >
         <div class="price">$0.00</div>
       </div>
       <div id="mobile-menu-wrap"></div>
@@ -97,7 +175,7 @@
             <div class="col-lg-6 col-md-5">
               <div class="header__top__right">
                 <div class="header__top__links">
-                  <a href="#">Sign in</a>
+                  <a href="login.html" id="userMenu">Sign in</a>
                   <a href="#">FAQs</a>
                 </div>
                 <div class="header__top__hover">
@@ -142,7 +220,10 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-              
+              <a href="#" class="search-switch"
+                ><img src="img/icon/search.png" alt=""
+              /></a>
+              <a href="#"><img src="img/icon/heart.png" alt="" /></a>
               <a href="./shopping-cart.html"
                 ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
               >
@@ -158,42 +239,17 @@
     <!-- Breadcrumb Section Begin -->
 
     <!-- Breadcrumb Section End -->
-    <div class="row">
-      <div class="wrapper" style="align-items: center">
-        <div class="title">Login Form</div>
-        <form action="#">
-          <div class="field">
-            <input type="text" id="loginUsername" required />
-            <label>Username</label>
-          </div>
-          <div class="field">
-            <input type="password" id="password" required style="width: 95%" />
-            <label>Password</label>
-            <i
-              class="fa fa-eye"
-              id="togglePassword"
-              style="cursor: pointer"
-            ></i>
-          </div>
-
-          <div class="content">
-            <div class="checkbox">
-              <input type="checkbox" id="remember-me" />
-              <label for="remember-me">Remember me</label>
-            </div>
-            <div class="pass-link">
-              <a href="#">Forgot password?</a>
-            </div>
-          </div>
-          <div class="field">
-            <input type="button" value="Login" onclick="loginUser()" />
-          </div>
-          <div class="signup-link">
-            Not a member? <a href="register.html">Signup now</a>
-          </div>
-        </form>
+    <section class="profile">
+      <div class="container">
+        <h1>Your Profile</h1>
+        <div id="userInfo">
+          <!-- Thông tin người dùng sẽ được hiển thị tại đây -->
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+
     <!-- About Section Begin -->
 
     <!-- Client Section End -->
@@ -300,15 +356,27 @@
     <script src="js/auth.js"></script>
 
     <script>
-      const togglePassword = document.querySelector("#togglePassword");
-      const password = document.querySelector("#password");
-      togglePassword.addEventListener("click", function () {
-        // Toggle the type attribute using getAttribute() method
-        const type =
-          password.getAttribute("type") === "password" ? "text" : "password";
-        password.setAttribute("type", type);
-        // Toggle the eye slash icon
-        this.classList.toggle("fa-eye-slash");
+      // Hiển thị thông tin người dùng
+      document.addEventListener("DOMContentLoaded", function () {
+        // Lấy thông tin từ localStorage
+        const username = localStorage.getItem("username");
+        const email = localStorage.getItem("email");
+        const phoneNumber = localStorage.getItem("phone");
+
+        // Tìm phần tử HTML để hiển thị thông tin
+        const userInfo = document.getElementById("userInfo");
+
+        if (username && email && phoneNumber) {
+          // Hiển thị thông tin người dùng
+          userInfo.innerHTML = `
+      <p><strong>Username:</strong> ${username}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phoneNumber}</p>
+    `;
+        } else {
+          // Thông báo nếu chưa đăng nhập
+          userInfo.innerHTML = "<p>Please log in to view your profile.</p>";
+        }
       });
     </script>
   </body>
