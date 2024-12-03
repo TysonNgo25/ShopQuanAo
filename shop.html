@@ -23,6 +23,22 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+    <style>
+      /* Styling cho liên kết khi được chọn (active) */
+      .shop__sidebar__categories a.active {
+        color: #000000; /* Màu giống như màu hover */
+        font-weight: bold;
+        text-decoration: underline; /* Giữ gạch dưới khi liên kết được chọn */
+      }
+
+      /* Hover effect for category links */
+      .shop__sidebar__categories a:hover {
+        color: #000000; /* Change to a lighter or different color on hover */
+        text-decoration: underline; /* Optional: adds underline effect on hover */
+        font-weight: bold; /* Ensures the hover link remains bold */
+      }
+    </style>
   </head>
 
   <body>
@@ -49,8 +65,15 @@
         </div>
       </div>
       <div class="offcanvas__nav__option">
-        <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()">
-        <a href="shopping-cart.html"><img src="img/icon/cart.png" alt="" /> <span>0</span></a>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          onkeyup="searchProducts()"
+        />
+        <a href="shopping-cart.html"
+          ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
+        >
         <div class="price">$0.00</div>
       </div>
       <div id="mobile-menu-wrap"></div>
@@ -118,8 +141,9 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-
-              <a href="./shopping-cart.html"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+              <a href="./shopping-cart.html"
+                ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
+              >
               <div class="price">$0.00</div>
             </div>
           </div>
@@ -155,12 +179,16 @@
             <div class="shop__sidebar">
               <div class="shop__sidebar__search">
                 <form action="#">
-                  <input type="text" id="searchInputHome" placeholder="Search..." onkeyup="searchProducts()" />
+                  <input
+                    type="text"
+                    id="searchInputHome"
+                    placeholder="Search..."
+                    onkeyup="searchProducts()"
+                  />
                   <button type="button">
                     <span class="icon_search"></span>
                   </button>
                 </form>
-                
               </div>
               <div class="shop__sidebar__accordion">
                 <div class="accordion" id="accordionExample">
@@ -178,18 +206,53 @@
                       <div class="card-body">
                         <div class="shop__sidebar__categories">
                           <ul class="nice-scroll">
-                            <li><a href="#">Men (12)</a></li>
+                            <li>
+                              <a
+                                href="#"
+                                data-category="all"
+                                onclick="displayProducts(products)"
+                                >All(12)</a
+                              >
+                            </li>
 
-                            <li><a href="#">Bags (3)</a></li>
-                            <li><a href="#">Clothing (5)</a></li>
-                            <li><a href="#">Shoes (1)</a></li>
-                            <li><a href="#">Accessories (3)</a></li>
-                            
+                            <li>
+                              <a
+                                href="#"
+                                data-category="bags"
+                                onclick="filterByCategory(event)"
+                                >Bags (3)</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="#"
+                                data-category="clothing"
+                                onclick="filterByCategory(event)"
+                                >Clothing (5)</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="#"
+                                data-category="shoes"
+                                onclick="filterByCategory(event)"
+                                >Shoes (1)</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="#"
+                                data-category="accessories"
+                                onclick="filterByCategory(event)"
+                                >Accessories (3)</a
+                              >
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="card">
                     <div class="card-heading">
                       <a data-toggle="collapse" data-target="#collapseThree"
@@ -206,15 +269,11 @@
                           <ul>
                             <li><a href="#">$0.00 - $50.00</a></li>
                             <li><a href="#">$50.00 - $100.00</a></li>
-                            
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
-                  
-                  
                 </div>
               </div>
             </div>
@@ -222,26 +281,15 @@
           <div class="col-lg-9">
             <div class="shop__product__option">
               <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  
-                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"></div>
               </div>
             </div>
 
-
-
-
-            <div id="product-container" class="row">
-
-            </div>
+            <div id="product-container" class="row"></div>
 
             <div class="row">
-              <div class="col-lg-12">
-                
-              </div>
+              <div class="col-lg-12"></div>
             </div>
           </div>
         </div>
@@ -333,23 +381,18 @@
         <form class="search-model-form">
           <input
             type="text"
-            id="search-input"  
+            id="search-input"
             name="query"
             placeholder="Search here....."
-            oninput="searchProducts()" 
+            oninput="searchProducts()"
           />
         </form>
       </div>
     </div>
-    
+
     <div class="search-results" id="search-results">
-      <div id="searchResultsList"> 
-      </div>
+      <div id="searchResultsList"></div>
     </div>
-    
-    
-    
-    
 
     <!-- Search End -->
 
@@ -372,8 +415,6 @@
 </html>
 
 <script>
-
-
   const productContainer = document.getElementById("product-container");
 
   // Lặp qua mảng products và tạo HTML
@@ -408,11 +449,9 @@
         </div>
       </div>
     `;
-
     // Chèn sản phẩm vào container
     productContainer.appendChild(productItem);
   });
-
 
   // Lặp qua mảng sản phẩm và hiển thị sản phẩm
   function displayProducts(productsToDisplay) {
@@ -455,11 +494,32 @@
   // Hiển thị toàn bộ sản phẩm ban đầu
   displayProducts(products);
 
+  function filterByCategory(event) {
+    event.preventDefault();
+
+    // Xóa lớp 'active' khỏi tất cả các mục
+    document
+      .querySelectorAll(".shop__sidebar__categories a")
+      .forEach((item) => {
+        item.classList.remove("active");
+      });
+
+    // Thêm lớp 'active' vào mục được chọn
+    event.target.classList.add("active");
+
+    const category = event.target.getAttribute("data-category");
+    const filteredProducts = products.filter(
+      (product) => product.category === category
+    );
+
+    displayProducts(filteredProducts);
+  }
+
   // Tìm kiếm sản phẩm theo từ khóa
   function searchProducts() {
     const searchInput = document
-            .getElementById("searchInputHome")
-            .value.toLowerCase();
+      .getElementById("searchInputHome")
+      .value.toLowerCase();
 
     const filteredProducts = products.filter((product) => {
       const productName = product.name.toLowerCase();
@@ -467,17 +527,12 @@
 
       // Kiểm tra nếu từ khóa khớp với tên sản phẩm hoặc giá
       return (
-              productName.includes(searchInput) || productPrice.toString().includes(searchInput)
+        productName.includes(searchInput) ||
+        productPrice.toString().includes(searchInput)
       );
     });
 
     // Hiển thị lại danh sách sản phẩm đã lọc
     displayProducts(filteredProducts);
   }
-
-
-  
- 
-
-
 </script>
