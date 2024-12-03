@@ -24,21 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-    <style>
-      /* Styling cho liên kết khi được chọn (active) */
-      .shop__sidebar__categories a.active {
-        color: #000000; /* Màu giống như màu hover */
-        font-weight: bold;
-        text-decoration: underline; /* Giữ gạch dưới khi liên kết được chọn */
-      }
-
-      /* Hover effect for category links */
-      .shop__sidebar__categories a:hover {
-        color: #000000; /* Change to a lighter or different color on hover */
-        text-decoration: underline; /* Optional: adds underline effect on hover */
-        font-weight: bold; /* Ensures the hover link remains bold */
-      }
-    </style>
+    
   </head>
 
   <body>
@@ -265,9 +251,12 @@
                       <div class="card-body">
                         <div class="shop__sidebar__price">
                           <ul>
-                            <li><a href="#">$0.00 - $50.00</a></li>
-                            <li><a href="#">$50.00 - $100.00</a></li>
+                            <li><a href="#" onclick="filterByPrice(0, 50); highlightLink(this)">$0.00 - $50.00</a></li>
+                            <li><a href="#" onclick="filterByPrice(50, 100); highlightLink(this)">$50.00 - $100.00</a></li>
                           </ul>
+                          
+                          <div id="product-list"></div> <!-- Khu vực để hiển thị các sản phẩm -->
+                          
                         </div>
                       </div>
                     </div>
@@ -534,3 +523,4 @@
     displayProducts(filteredProducts);
   }
 </script>
+
