@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/Admin/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/Admin/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="/Admin/css/templatemo-style.css" />
+    <link rel="stylesheet" href="./Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./Admin/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="./Admin/css/templatemo-style.css" />
     <title>Product Management</title>
     <style>
       /* Reset margin và padding cho toàn bộ trang */
@@ -20,10 +20,35 @@
         background-color: black;
         color: white;
         text-align: center;
-        padding: 20px 0; /* Padding trên và dưới */
+        padding: 10px 0; /* Reduced padding for smaller header */
         width: 100%; /* Chiếm toàn bộ chiều rộng */
         position: relative;
       }
+
+      /* Style cho container của liên kết "Back to Home" */
+      .back-to-home-container {
+        background-color: white;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .back-to-home {
+  font-size: 18px;
+ 
+  color: black; /* Màu chữ khi chưa hover */
+  text-decoration: none; /* Không có gạch chân */
+}
+
+.back-to-home:hover {
+  color: black; /* Màu chữ không đổi khi hover */
+}
+
 
       /* Body style */
       body {
@@ -38,8 +63,7 @@
 
       /* Nội dung chính */
       .main-content {
-        padding: 0 20px; /* Thêm padding trái/phải để tránh nội dung sát biên */
-        height: auto; /* Cho phép nội dung kéo dài khi cần thiết */
+        padding: 0 20px; /* Thêm padding trái/phải để tránh nội dung
         max-width: 1200px; /* Giới hạn độ rộng tối đa của nội dung */
         margin: 0 auto; /* Căn giữa nội dung */
       }
@@ -109,10 +133,37 @@
         left: 0;
         height: 28px;
       }
+      @media (max-width: 768px) {
+  .header {
+    padding: 10px 0; /* Giảm padding header */
+  }
+
+  .product-form,
+  .product-list {
+    padding: 10px; /* Giảm padding trong các form và bảng */
+  }
+
+  .product-list table {
+    font-size: 14px; /* Giảm kích thước font cho bảng */
+  }
+
+  .back-to-home {
+    font-size: 16px; /* Giảm kích thước chữ cho liên kết */
+  }
+
+  /* Cách ẩn các phần tử không cần thiết trên màn hình nhỏ */
+  .some-large-element {
+    display: none;
+  }
+}
+
     </style>
   </head>
   <body>
     <div class="header">
+      <div class="back-to-home-container">
+        <a href="Dashboard.html" class="back-to-home">Back to Home</a>
+      </div>
       <h1>Product Management</h1>
     </div>
 
@@ -322,15 +373,13 @@
                 image: event.target.result,
               });
               renderProducts();
+              productForm.reset();
+              selectedColors = [];
+              selectedColorsDisplay.textContent = "";
             };
             reader.readAsDataURL(productImage);
-          } else {
-            alert("Please select a product image!");
           }
         }
-        productForm.reset();
-        selectedColors = [];
-        selectedColorsDisplay.textContent = "";
       });
 
       renderProducts();
