@@ -55,7 +55,7 @@ function checkLoginStatus() {
         <ul class="user-options">
           <li><a href="profile.html">Profile</a></li>
            <li><a href="yourcart.html">Your cart</a></li>
-          <li><button onclick="logout()" style="border:none; background:none; color:white; cursor:pointer;">Log Out</button></li>
+          <li><button onclick="logout()" style="border:none; background:none; color:white; cursor:pointer;">LOG OUT</button></li>
         </ul>
       </div>
     `;
@@ -75,7 +75,7 @@ function checkLoginStatus() {
         background-color: #333;
         min-width: 160px;
         box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-        z-index: 1;
+        z-index: 9999;
         list-style: none;
         padding: 0;
         margin: 0;
