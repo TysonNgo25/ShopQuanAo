@@ -6,16 +6,19 @@ function registerUser() {
   const email = document.getElementById("registerEmail");
   const phone = document.getElementById("registerPhone");
   const address = document.getElementById("registerAddress"); // Thêm trường Address
+  const fullname=document.getElementById("registerFullname");
 
 
-  if (username && password && email && phone && address) {
+  if (username && password && email && phone && address && fullname) {
     if (username.value && password.value && email.value && phone.value &&
-      address.value ) {
+      address.value && fullname.value ) {
       localStorage.setItem("username", username.value);
       localStorage.setItem("password", password.value);
       localStorage.setItem("email", email.value);
       localStorage.setItem("phone", phone.value);
       localStorage.setItem("address", address.value);
+      localStorage.setItem("fullname", fullname.value);
+
       
       alert("Đăng ký thành công!");
       window.location.href = "login.html";
@@ -131,16 +134,7 @@ function addToCart() {
     window.location.href = "login.html";
   }
 }
-// // Kiểm tra trạng thái đăng nhập ngay khi trang giỏ hàng được tải
-// window.onload = function() {
-//   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-//   // Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
-//   if (isLoggedIn !== "true") {
-//     alert("Vui lòng đăng nhập để xem giỏ hàng.");
-//     window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
-//   }
-// };
 
 
 function logout() {
@@ -171,8 +165,3 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Element #userMenu not found in the DOM.");
   }
 });
-// function logout() {
-//   localStorage.removeItem("cart"); // Xóa giỏ hàng
-//   localStorage.clear(); // Xóa tất cả dữ liệu nếu cần
-//   alert("Đăng xuất thành công!");
-// }

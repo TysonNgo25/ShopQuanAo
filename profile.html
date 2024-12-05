@@ -356,18 +356,21 @@
         const email = localStorage.getItem("email");
         const phoneNumber = localStorage.getItem("phone");
         const address = localStorage.getItem("address");
+        const fullName=localStorage.getItem("fullname");
 
 
         // Tìm phần tử HTML để hiển thị thông tin
         const userInfo = document.getElementById("userInfo");
 
-        if (username && email && phoneNumber && address) {
+        if (username && email && phoneNumber && address && fullName) {
           // Hiển thị thông tin người dùng
           userInfo.innerHTML = `
       <p><strong>Username:</strong> ${username}</p>
+      <p><strong>Full name:</strong> ${fullName}</p>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phoneNumber}</p>
       <p><strong>Address:</strong> ${address}</p>
+
 
     `;
         } else {

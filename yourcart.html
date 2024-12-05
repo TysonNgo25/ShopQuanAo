@@ -238,80 +238,62 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      // Cập nhật giỏ hàng
-      function updateCartUI() {
+    function updateCartUI() {
         const cartTableBody = document.querySelector("#cart-table tbody");
-        const cartSubtotal = document.querySelector(
-          ".cart__total ul li:nth-last-child(2) span"
-        );
-        const cartTotal = document.querySelector(
-          ".cart__total ul li:last-child span"
-        );
+        const cartSubtotal = document.querySelector(".cart__total ul li:nth-last-child(2) span");
+        const cartTotal = document.querySelector(".cart__total ul li:last-child span");
 
         if (cart.length === 0) {
-          cartTableBody.innerHTML = `<tr><td colspan="4" class="text-center">Your cart is empty!</td></tr>`;
-          if (cartTotal) cartTotal.textContent = "$0.00";
-          return;
+            cartTableBody.innerHTML = `<tr><td colspan="4" class="text-center">Your cart is empty!</td></tr>`;
+            if (cartTotal) cartTotal.textContent = "$0.00";
+            return;
         }
 
-        // Hiển thị sản phẩm trong giỏ hàng
         cartTableBody.innerHTML = cart
-          .map(
-            (item, index) => `
-        <tr>
-          <td class="product__cart__item">
-            <div class="product__cart__item__pic">
-              <img src="${item.image}" alt="${item.name}" />
-            </div>
-            <div class="product__cart__item__text">
-              <h6>${item.name}</h6>
-             
-            </div>
-          </td>
-          <td class="quantity__item">
-            <div class="quantity">
-              
-              <span>${item.quantity}</span>
-              
-            </div>
-          </td>
-          <td class="cart__price">$${(item.price * item.quantity).toFixed(
-            2
-          )}</td>
-          
-        </tr>`
-          )
-          .join("");
+            .map(
+                (item, index) => `
+            <tr>
+              <td class="product__cart__item">
+                <div class="product__cart__item__pic">
+                  <img src="${item.image}" alt="${item.name}" />
+                </div>
+                <div class="product__cart__item__text">
+                  <h6>${item.name}</h6>
+                </div>
+              </td>
+              <td class="quantity__item">
+                <div class="quantity">
+                  <span>${item.quantity}</span>
+                </div>
+              </td>
+              <td class="cart__price">$${(item.price * item.quantity).toFixed(2)}</td>
+            </tr>`
+            )
+            .join("");
 
-        // Tính tổng tiền
-        const totalPrice = cart.reduce(
-          (sum, item) => sum + item.price * item.quantity,
-          0
-        );
+        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         const totalElement = document.getElementById("total");
         if (totalElement) totalElement.textContent = `$${totalPrice.toFixed(2)}`;
         if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
-        if (cartSubtotal)
-          cartSubtotal.textContent = `$${totalPrice.toFixed(2)}`;
-      }
+        if (cartSubtotal) cartSubtotal.textContent = `$${totalPrice.toFixed(2)}`;
+    }
 
-      // Hiển thị thông tin giao hàng
-      const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-      if (orderDetails) {
-        document.getElementById("recipient").textContent =
-          orderDetails.recipient;
+    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+    if (orderDetails) {
+        document.getElementById("recipient").textContent = orderDetails.recipient;
         document.getElementById("phone").textContent = orderDetails.phone;
         document.getElementById("address").textContent = orderDetails.address;
-        document.getElementById("payment-method").textContent =
-          orderDetails.paymentMethod;
-      } else {
+        document.getElementById("payment-method").textContent = orderDetails.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thẻ tín dụng';
+    } else {
         alert("Không tìm thấy thông tin đơn hàng.");
-      }
+    }
 
-      updateCartUI(); // Cập nhật giỏ hàng khi trang được tải
-    });
+    updateCartUI();
+});
+
+   
   </script>
     <!-- Footer -->
 
@@ -419,10 +401,8 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
-    <!------ thêm js------>
-    <script>
-   
-    </script>
+    
+    
     
 
    
