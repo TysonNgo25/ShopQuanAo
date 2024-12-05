@@ -191,14 +191,14 @@
         const productData = [
           {
             name: "Pique Biker Jacket",
-            quantity: 150,
+            quantity: 15,
             price: 45.0,
             id: 1,
             revenue: 45.0 * 150,
           },
           {
             name: "Black Sneaker",
-            quantity: 120,
+            quantity: 12,
             price: 35.0,
             id: 2,
             revenue: 35.0 * 120,
@@ -212,35 +212,35 @@
           },
           {
             name: "Gray Fringed Scarf",
-            quantity: 200,
+            quantity: 21,
             price: 30.0,
             id: 4,
             revenue: 30.0 * 200,
           },
           {
             name: "Black Floral Graphic T-Shirt",
-            quantity: 200,
+            quantity: 29,
             price: 25.0,
             id: 5,
             revenue: 25.0 * 200,
           },
           {
             name: "Perfume Set",
-            quantity: 200,
+            quantity: 2,
             price: 75.0,
             id: 6,
             revenue: 75.0 * 200,
           },
           {
             name: "White Utility Backpack",
-            quantity: 20,
+            quantity: 22,
             price: 50.0,
             id: 7,
             revenue: 50.0 * 20,
           },
           {
             name: "Comouflage Hooded Jacket",
-            quantity: 100,
+            quantity: 10,
             price: 60.0,
             id: 8,
             revenue: 60.0 * 100,
@@ -261,14 +261,14 @@
           },
           {
             name: "Fringed Black Scarf",
-            quantity: 201,
+            quantity: 20,
             price: 35.0,
             id: 11,
             revenue: 35.0 * 201,
           },
           {
             name: "Navy Henley T-shirt",
-            quantity: 301,
+            quantity: 30,
             price: 20.0,
             id: 12,
             revenue: 20.0 * 301,
@@ -293,17 +293,21 @@
           productData.forEach((product) => {
             totalRevenue += product.revenue;
 
-            if (product.revenue > mostPopular.revenue) mostPopular = product;
-            if (product.revenue < leastPopular.revenue) leastPopular = product;
+            // Update the most popular product based on quantity
+            if (product.quantity > mostPopular.quantity) mostPopular = product;
+
+            // Update the least popular product based on quantity
+            if (product.quantity < leastPopular.quantity)
+              leastPopular = product;
 
             tableHTML += `
-                        <tr>
-                            <td>${product.name}</td>
-                            <td>${product.quantity}</td>
-                            <td>$${product.revenue}</td>
-                            <td><a href="invoice.html?product_id=${product.id}">View Invoice</a></td>
-                        </tr>
-                    `;
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>$${product.revenue}</td>
+                <td><a href="invoice.html?product_id=${product.id}">View Invoice</a></td>
+            </tr>
+        `;
           });
 
           document.getElementById("productTable").innerHTML = tableHTML;
