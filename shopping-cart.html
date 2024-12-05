@@ -383,5 +383,19 @@
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script>
+      window.onload = function() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  // Kiểm tra xem người dùng đã đăng nhập chưa
+  if (isLoggedIn !== "true") {
+    // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+    alert("Vui lòng đăng nhập để xem giỏ hàng.");
+    window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
+  }
+};
+
+    </script>
+   
   </body>
 </html>

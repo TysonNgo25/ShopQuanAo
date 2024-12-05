@@ -484,5 +484,18 @@
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/checkout.js"></script>
+    <script>
+      window.onload = function() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  // Kiểm tra xem người dùng đã đăng nhập chưa
+  if (isLoggedIn !== "true") {
+    // Nếu chưa đăng nhập, hiển thị thông báo và chuyển hướng đến trang đăng nhập
+    alert("Vui lòng đăng nhập để xem checkout.");
+    window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
+  }
+};
+
+    </script>
   </body>
 </html>

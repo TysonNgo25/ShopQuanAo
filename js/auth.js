@@ -45,7 +45,7 @@ function loginUser() {
   }
 }
 
-// Kiểm tra trạng thái đăng nhập
+
 
 // Kiểm tra trạng thái đăng nhập
 function checkLoginStatus() {
@@ -131,6 +131,17 @@ function addToCart() {
     window.location.href = "login.html";
   }
 }
+// // Kiểm tra trạng thái đăng nhập ngay khi trang giỏ hàng được tải
+// window.onload = function() {
+//   const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+//   // Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
+//   if (isLoggedIn !== "true") {
+//     alert("Vui lòng đăng nhập để xem giỏ hàng.");
+//     window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
+//   }
+// };
+
 
 function logout() {
   

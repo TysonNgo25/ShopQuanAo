@@ -335,8 +335,3 @@ if (checkoutButton) {
       }
     });
 });
-function logout() {
-  localStorage.removeItem("cart"); // Xóa giỏ hàng
-  localStorage.clear(); // Xóa tất cả dữ liệu nếu cần
-  alert("Đăng xuất thành công!");
-}
