@@ -5,13 +5,18 @@ function registerUser() {
   const password = document.getElementById("registerPassword");
   const email = document.getElementById("registerEmail");
   const phone = document.getElementById("registerPhone");
+  const address = document.getElementById("registerAddress"); // Thêm trường Address
 
-  if (username && password && email && phone) {
-    if (username.value && password.value && email.value && phone.value) {
+
+  if (username && password && email && phone && address) {
+    if (username.value && password.value && email.value && phone.value &&
+      address.value ) {
       localStorage.setItem("username", username.value);
       localStorage.setItem("password", password.value);
       localStorage.setItem("email", email.value);
       localStorage.setItem("phone", phone.value);
+      localStorage.setItem("address", address.value);
+      
       alert("Đăng ký thành công!");
       window.location.href = "login.html";
     } else {
@@ -128,9 +133,23 @@ function addToCart() {
 }
 
 function logout() {
+  
+    // Hiển thị hộp thoại xác nhận
+    const isConfirmed = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+    
+    if (isConfirmed) {
+      // Nếu người dùng chọn OK, tiến hành đăng xuất
+      localStorage.removeItem("isLoggedIn"); // Xóa trạng thái đăng nhập
+      alert("Đã đăng xuất thành công!");
+      window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
+    } else {
+      // Nếu người dùng chọn Cancel, hủy bỏ hành động
+      alert("Hủy đăng xuất!");
+    
+  }
+  
   localStorage.setItem("isLoggedIn", "false");
   localStorage.removeItem("loggedInUser"); // Xóa tên người dùng
-  window.location.href = "index.html"; // Quay lại trang chính
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -141,3 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Element #userMenu not found in the DOM.");
   }
 });
+// function logout() {
+//   localStorage.removeItem("cart"); // Xóa giỏ hàng
+//   localStorage.clear(); // Xóa tất cả dữ liệu nếu cần
+//   alert("Đăng xuất thành công!");
+// }

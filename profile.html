@@ -134,7 +134,7 @@
       <div class="offcanvas__option">
         <div class="offcanvas__links">
           <a href="#">Sign in</a>
-          <a href="#">FAQs</a>
+          <a href="contact.html">SPT</a>
         </div>
         <div class="offcanvas__top__hover">
           <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -172,7 +172,7 @@
               <div class="header__top__right">
                 <div class="header__top__links">
                   <a href="login.html" id="userMenu">Sign in</a>
-                  <a href="#">FAQs</a>
+                  <a href="contact.html">SPT</a>
                 </div>
                 <div class="header__top__hover">
                   <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -355,16 +355,20 @@
         const username = localStorage.getItem("username");
         const email = localStorage.getItem("email");
         const phoneNumber = localStorage.getItem("phone");
+        const address = localStorage.getItem("address");
+
 
         // Tìm phần tử HTML để hiển thị thông tin
         const userInfo = document.getElementById("userInfo");
 
-        if (username && email && phoneNumber) {
+        if (username && email && phoneNumber && address) {
           // Hiển thị thông tin người dùng
           userInfo.innerHTML = `
       <p><strong>Username:</strong> ${username}</p>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phoneNumber}</p>
+      <p><strong>Address:</strong> ${address}</p>
+
     `;
         } else {
           // Thông báo nếu chưa đăng nhập
