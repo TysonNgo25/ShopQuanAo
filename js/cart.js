@@ -266,6 +266,8 @@ if (checkoutButton) {
 
     if (!confirmPayment) {
       return; // Nếu người dùng không xác nhận, dừng hành động
+    }else{
+      alert("Thanh toán thành công , Cảm ơn quý khách!")
     }
 
     // Lấy phương thức thanh toán đã được chọn
@@ -277,11 +279,7 @@ if (checkoutButton) {
     const phone = document.getElementById("phone").value;
     const address = document.getElementById("address").value;
 
-    // Kiểm tra xem người dùng đã điền đầy đủ thông tin giao hàng chưa
-    if (!recipient || !phone || !address) {
-      alert("Vui lòng điền đầy đủ thông tin giao hàng.");
-      return;
-    }
+    
 
     // Lưu thông tin giao hàng vào localStorage
     const orderDetails = {
