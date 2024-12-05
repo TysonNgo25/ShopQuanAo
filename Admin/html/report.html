@@ -8,12 +8,39 @@
     <link rel="stylesheet" href="../css/fontawesome.min.css" />
     <link rel="stylesheet" href="../css/templatemo-style.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      /* Your existing styles here */
+      .tm-table-container {
+        margin-top: 20px;
       }
 
+      .tm-status-circle {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .tm-status-circle.pending {
+        background-color: orange;
+      }
+
+      .tm-status-circle.confirmed {
+        background-color: blue;
+      }
+
+      .tm-status-circle.success {
+        background-color: green;
+      }
+
+      .tm-status-circle.cancelled {
+        background-color: red;
+      }
+
+      .status-dropdown {
+        width: 100px;
+        padding: 5px;
+      }
       /* Header style */
       .header {
         background-color: black;
@@ -48,52 +75,7 @@
         text-decoration: none;
       }
 
-      body {
-        font-family: "Roboto", sans-serif;
-        background-color: white;
-        color: black;
-        padding: 80px 20px 20px; /* Tăng padding trên để tránh trùng header */
-      }
-
-      .tm-table-container {
-        margin-top: 20px;
-      }
-
-      .tm-status-circle {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 8px;
-      }
-
-      .tm-status-circle.pending {
-        background-color: orange;
-      }
-
-      .tm-status-circle.confirmed {
-        background-color: blue;
-      }
-
-      .tm-status-circle.success {
-        background-color: green;
-      }
-
-      .tm-status-circle.cancelled {
-        background-color: red;
-      }
-
-      .filter-container {
-        margin-top: 40px;
-        margin-bottom: 20px;
-      }
-
-      .filter-container input,
-      .filter-container select,
-      .filter-container button {
-        margin-right: 10px;
-      }
-
+      /* Footer style */
       footer {
         background-color: black;
         color: white;
@@ -105,66 +87,8 @@
         left: 0;
         z-index: 1;
       }
-      @media screen and (max-width: 768px) {
-        /* Adjust header and table layout for smaller screens */
-        .header {
-          flex-direction: column;
-          text-align: center;
-          padding: 10px;
-        }
-
-        .header .back-btn {
-          margin: 10px 0;
-          font-size: 0.9rem;
-        }
-
-        .tm-table-container {
-          margin-top: 60px; /* Added space for header */
-        }
-
-        .filter-container {
-          flex-direction: column;
-        }
-
-        .filter-container input,
-        .filter-container select,
-        .filter-container button {
-          width: 100%;
-          margin-bottom: 10px;
-        }
-
-        .filter-container label {
-          width: 100%;
-          text-align: left;
-          margin-bottom: 5px;
-        }
-      }
-
-      @media screen and (max-width: 480px) {
-        /* Further adjustments for very small screens (phones) */
-        .header h1 {
-          font-size: 1.2rem;
-        }
-
-        .header .back-btn {
-          font-size: 0.8rem;
-          padding: 8px 16px;
-        }
-
-        .filter-container input,
-        .filter-container select,
-        .filter-container button {
-          font-size: 0.9rem;
-        }
-
-        .tm-status-circle {
-          width: 8px;
-          height: 8px;
-        }
-
-        footer {
-          font-size: 0.8rem;
-        }
+      .tm-table-container {
+        margin-top: 80px; /* Tăng margin-top để tránh che khuất bởi header */
       }
     </style>
   </head>
@@ -173,34 +97,6 @@
     <div class="header">
       <a href="Dashboard.html" class="back-btn">Back to Home</a>
       <h1>Order Management</h1>
-    </div>
-
-    <div class="filter-container">
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" />
-      <label for="endDate">End Date:</label>
-      <input type="date" id="endDate" />
-
-      <label for="statusFilter">Status:</label>
-      <select id="statusFilter">
-        <option value="">All</option>
-        <option value="pending">Pending</option>
-        <option value="confirmed">Confirmed</option>
-        <option value="success">Success</option>
-        <option value="cancelled">Cancelled</option>
-      </select>
-
-      <label for="districtFilter">District:</label>
-      <input type="text" id="districtFilter" placeholder="Enter district..." />
-
-      <label for="sortOrder">Sort by District:</label>
-      <select id="sortOrder">
-        <option value="">None</option>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-
-      <button id="filterBtn">Filter</button>
     </div>
 
     <div class="tm-table-container">
@@ -213,6 +109,8 @@
             <th>Location</th>
             <th>Order Date</th>
             <th>Details</th>
+            <th>Change Status</th>
+            <!-- New column for status change -->
           </tr>
         </thead>
         <tbody id="orderTableBody">
@@ -220,6 +118,7 @@
         </tbody>
       </table>
     </div>
+
     <footer>
       <p>&copy; 2024 Product Management. All Rights Reserved.</p>
     </footer>
@@ -264,7 +163,7 @@
         },
       ];
 
-      // Render orders in table
+      // Render orders in table with a dropdown for status change
       function renderOrders(filteredOrders) {
         const tableBody = document.getElementById("orderTableBody");
         tableBody.innerHTML = "";
@@ -278,52 +177,59 @@
           }[order.status];
 
           tableBody.innerHTML += `
-                    <tr>
-                        <td>${order.id}</td>
-                        <td><div class="tm-status-circle ${statusClass}"></div>${order.status}</td>
-                        <td>${order.customer}</td>
-                        <td>${order.location}</td>
-                        <td>${order.date}</td>
-                        <td><a href="detailorder.html?id=${order.id}" class="text-info">View Details</a></td>
-                    </tr>
-                `;
+            <tr>
+              <td>${order.id}</td>
+              <td><div class="tm-status-circle ${statusClass}"></div>${
+            order.status
+          }</td>
+              <td>${order.customer}</td>
+              <td>${order.location}</td>
+              <td>${order.date}</td>
+              <td><a href="detailorder.html?id=${
+                order.id
+              }" class="text-info">View Details</a></td>
+              <td>
+                <select class="status-dropdown" onchange="changeStatus(${
+                  order.id
+                }, this.value)">
+                  <option value="pending" ${
+                    order.status === "pending" ? "selected" : ""
+                  }>Pending</option>
+                  <option value="confirmed" ${
+                    order.status === "confirmed" ? "selected" : ""
+                  }>Confirmed</option>
+                  <option value="success" ${
+                    order.status === "success" ? "selected" : ""
+                  }>Success</option>
+                  <option value="cancelled" ${
+                    order.status === "cancelled" ? "selected" : ""
+                  }>Cancelled</option>
+                </select>
+              </td>
+            </tr>
+          `;
         });
       }
 
-      // Filter orders
-      document.getElementById("filterBtn").addEventListener("click", () => {
-        const startDate = document.getElementById("startDate").value;
-        const endDate = document.getElementById("endDate").value;
-        const statusFilter = document.getElementById("statusFilter").value;
-        const districtFilter = document
-          .getElementById("districtFilter")
-          .value.toLowerCase();
-        const sortOrder = document.getElementById("sortOrder").value;
+      // Function to handle status change
+      // Function to handle status change with confirmation
+      function changeStatus(orderId, newStatus) {
+        // Ask for confirmation before changing the status
+        const confirmation = confirm(
+          "Bạn có chắc chắn muốn thay đổi trạng thái đơn hàng này không?"
+        );
 
-        // Filter orders based on date range, status, and district
-        const filteredOrders = orders.filter((order) => {
-          const matchesDate =
-            (!startDate || new Date(order.date) >= new Date(startDate)) &&
-            (!endDate || new Date(order.date) <= new Date(endDate));
-          const matchesStatus = !statusFilter || order.status === statusFilter;
-          const matchesDistrict =
-            !districtFilter ||
-            order.location.toLowerCase().includes(districtFilter);
-
-          return matchesDate && matchesStatus && matchesDistrict;
-        });
-
-        // Sort orders by district
-        if (sortOrder === "asc") {
-          filteredOrders.sort((a, b) => a.location.localeCompare(b.location));
-        } else if (sortOrder === "desc") {
-          filteredOrders.sort((a, b) => b.location.localeCompare(a.location));
+        if (confirmation) {
+          // If confirmed, update the status of the order
+          const order = orders.find((order) => order.id === orderId);
+          if (order) {
+            order.status = newStatus;
+            renderOrders(orders); // Re-render the table to show updated status
+          }
         }
+      }
 
-        renderOrders(filteredOrders);
-      });
-
-      // Initial render
+      // Initially render all orders
       renderOrders(orders);
     </script>
   </body>
