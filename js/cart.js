@@ -215,6 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
       recipient = document.getElementById("other-full-name").value;
       phone = document.getElementById("other-phone-number").value;
       address = document.getElementById("other-address").value;
+       // Kiểm tra nếu có bất kỳ trường nào bị bỏ trống
+       if (!recipient || !phone || !address) {
+        alert("Vui lòng nhập đầy đủ thông tin người nhận!");
+        return;
+       }
     } else {
       recipient = localStorage.getItem("fullname");
       phone = localStorage.getItem("phone");
