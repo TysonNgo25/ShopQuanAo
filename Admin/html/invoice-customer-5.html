@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - View Customer Invoices</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 80%;
+        margin: 30px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      /* Customer Info Section */
+      .customer-list {
+        margin-bottom: 30px;
+      }
+
+      .customer-card {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+
+      .customer-card:hover {
+        background-color: #f1f1f1;
+      }
+
+      /* Invoice Detail Section */
+      .invoice-details {
+        margin-top: 40px;
+      }
+
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      #totalAmount {
+        font-size: 20px;
+        color: green;
+        font-weight: bold;
+      }
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        overflow: auto;
+        padding-top: 60px;
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be adjusted */
+        max-width: 800px;
+      }
+
+      /* Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .back-btn {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      .back-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+    </style>
+  </head>
+  <body>
+    <!-- Modal overlay to display invoice details -->
+    <div id="invoiceModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <div id="invoiceDetails"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <a href="Dashboard.html" class="back-btn">Back to Home</a>
+
+      <h2>Admin Dashboard</h2>
+
+      <!-- Customer List Section -->
+      <div class="customer-list">
+        <h3>Customers</h3>
+        <div id="customerList">
+          <!-- Customer cards will be inserted here dynamically -->
+        </div>
+      </div>
+
+      <!-- Invoice Detail Section -->
+      <div id="invoiceDetails" class="invoice-details">
+        <!-- Invoice details for selected customer will appear here -->
+      </div>
+    </div>
+
+    <script>
+      // Sample data for customers and their invoices
+      const customers = [
+        {
+          id: 101,
+          name: "Ngo Nguyen Thanh Nhan",
+          email: "johndoe@example.com",
+          phone: "123-456-7890",
+          invoices: [
+            {
+              invoiceId: 1,
+              date: "2024-12-01",
+              totalAmount: 300,
+              products: [
+                {
+                  name: "Black Floral Graphic T-Shirt",
+                  quantity: 12,
+                  price: 25.0,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 102,
+          name: "Tom Cruishe",
+          email: "janesmith@example.com",
+          phone: "987-654-3210",
+          invoices: [
+            {
+              invoiceId: 3,
+              date: "2024-12-02",
+              totalAmount: 150,
+              products: [
+                {
+                  name: "Black Floral Graphic T-Shirt",
+                  quantity: 17,
+                  price: 25.0,
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      // Function to display customer list on Dashboard
+      function displayCustomerList() {
+        const customerListDiv = document.getElementById("customerList");
+        customerListDiv.innerHTML = ""; // Clear existing content
+
+        customers.forEach((customer) => {
+          const customerCard = document.createElement("div");
+          customerCard.classList.add("customer-card");
+          customerCard.setAttribute("data-customer-id", customer.id);
+          customerCard.innerHTML = `
+                    <h4>${customer.name}</h4>
+                    <p>Email: ${customer.email}</p>
+                    <p>Phone: ${customer.phone}</p>
+                `;
+          customerCard.addEventListener("click", () => {
+            displayInvoiceDetails(customer.id);
+          });
+          customerListDiv.appendChild(customerCard);
+        });
+      }
+
+      // Function to display invoice details for a specific customer
+      function displayInvoiceDetails(customerId) {
+        const customer = customers.find((c) => c.id === customerId);
+        const invoiceDetailsDiv = document.getElementById("invoiceDetails");
+        invoiceDetailsDiv.innerHTML = ""; // Clear existing content
+
+        const customerInfo = document.createElement("h3");
+        customerInfo.innerHTML = `Invoices for ${customer.name}`;
+        invoiceDetailsDiv.appendChild(customerInfo);
+
+        customer.invoices.forEach((invoice) => {
+          const invoiceCard = document.createElement("div");
+          invoiceCard.classList.add("card");
+
+          const invoiceHeader = document.createElement("h4");
+          invoiceHeader.textContent = `Invoice #${invoice.invoiceId} - ${invoice.date}`;
+          invoiceCard.appendChild(invoiceHeader);
+
+          const table = document.createElement("table");
+          table.classList.add("table");
+          const tableHeader = document.createElement("thead");
+          tableHeader.innerHTML = `
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        `;
+          table.appendChild(tableHeader);
+
+          const tableBody = document.createElement("tbody");
+          invoice.products.forEach((product) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>$${product.price}</td>
+                <td>$${product.quantity * product.price}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+
+          table.appendChild(tableBody);
+          invoiceCard.appendChild(table);
+
+          const totalAmount = document.createElement("p");
+
+          invoiceCard.appendChild(totalAmount);
+
+          invoiceDetailsDiv.appendChild(invoiceCard);
+        });
+
+        // Show the modal
+        const modal = document.getElementById("invoiceModal");
+        modal.style.display = "block";
+
+        // Close the modal when the close button is clicked
+        const closeModal = document.getElementById("closeModal");
+        closeModal.onclick = function () {
+          modal.style.display = "none";
+        };
+
+        // Close the modal if the user clicks anywhere outside of the modal
+        window.onclick = function (event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        };
+      }
+
+      // Initialize Dashboard with customer list
+      displayCustomerList();
+    </script>
+  </body>
+</html>

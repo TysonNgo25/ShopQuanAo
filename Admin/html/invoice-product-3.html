@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice - Customer Purchases</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 80%;
+        margin: 30px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      /* Invoice Detail Section */
+      .invoice-details {
+        margin-top: 40px;
+      }
+
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      #totalAmount {
+        font-size: 20px;
+        color: green;
+        font-weight: bold;
+      }
+
+      /* Back Button */
+      .back-btn {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      .back-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="Dashboard.html" class="back-btn">Back to Home</a>
+      <h2>Customer Invoice</h2>
+
+      <!-- Invoice Detail Section -->
+      <div class="invoice-details">
+        <h3>
+          Invoices for <span id="customerName">Ngo Nguyen Thanh Nhan</span>
+        </h3>
+
+        <!-- Invoice 1 -->
+        <div class="card">
+          <h4>Invoice #12345</h4>
+          <p>Date: <span id="invoiceDate1">2024-12-01</span></p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceProducts1">
+              <!-- Product items will be added dynamically for Invoice 1 -->
+            </tbody>
+          </table>
+
+          <p>Total Amount: <span id="totalAmount1">$0</span></p>
+        </div>
+
+        <!-- Invoice 2 -->
+        <div class="card">
+          <h4>Invoice #12346</h4>
+          <p>Date: <span id="invoiceDate2">2024-12-02</span></p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceProducts2">
+              <!-- Product items will be added dynamically for Invoice 2 -->
+            </tbody>
+          </table>
+
+          <p>Total Amount: <span id="totalAmount2">$0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for two invoices
+      const invoiceData1 = {
+        invoiceId: 12345,
+        date: "2024-12-01",
+        products: [
+          { name: "Brown Hooded Shirt Jacket", quantity: 4, price: 55.0 },
+        ],
+      };
+
+      const invoiceData2 = {
+        invoiceId: 12346,
+        date: "2024-12-02",
+        products: [
+          { name: "Black Floral Graphic T-Shirt ", quantity: 12, price: 25.0 },
+        ],
+      };
+
+      // Function to display invoice details for each invoice
+      function displayInvoiceDetails(invoiceData, invoiceNumber) {
+        const invoiceDateElement = document.getElementById(
+          `invoiceDate${invoiceNumber}`
+        );
+        const invoiceProductsTable = document.getElementById(
+          `invoiceProducts${invoiceNumber}`
+        );
+        const totalAmountElement = document.getElementById(
+          `totalAmount${invoiceNumber}`
+        );
+
+        let totalAmount = 0;
+        invoiceDateElement.textContent = invoiceData.date;
+
+        // Loop through products to add them to the table and calculate total amount
+        invoiceData.products.forEach((product) => {
+          const row = document.createElement("tr");
+
+          const productNameCell = document.createElement("td");
+          productNameCell.textContent = product.name;
+
+          const quantityCell = document.createElement("td");
+          quantityCell.textContent = product.quantity;
+
+          const priceCell = document.createElement("td");
+          priceCell.textContent = `$${product.price}`;
+
+          const totalCell = document.createElement("td");
+          const totalProductPrice = product.quantity * product.price;
+          totalCell.textContent = `$${totalProductPrice}`;
+
+          row.appendChild(productNameCell);
+          row.appendChild(quantityCell);
+          row.appendChild(priceCell);
+          row.appendChild(totalCell);
+          invoiceProductsTable.appendChild(row);
+
+          // Accumulate total amount
+          totalAmount += totalProductPrice;
+        });
+
+        // Display total amount
+        totalAmountElement.textContent = `$${totalAmount}`;
+      }
+
+      // Initialize the invoice page with two invoices
+      displayInvoiceDetails(invoiceData1, 1);
+      displayInvoiceDetails(invoiceData2, 2);
+    </script>
+  </body>
+</html>

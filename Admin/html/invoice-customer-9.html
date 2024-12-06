@@ -125,6 +125,21 @@
         text-decoration: none;
         cursor: pointer;
       }
+      /* Back Button */
+      .back-btn {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      .back-btn:hover {
+        background-color: #0056b3;
+      }
     </style>
   </head>
   <body>
@@ -137,7 +152,8 @@
     </div>
 
     <div class="container">
-      <h2>Admin Dashboard</h2>
+      <a href="Dashboard.html" class="back-btn">Back to Home</a>
+      <h2>Invoice</h2>
 
       <!-- Customer List Section -->
       <div class="customer-list">
@@ -158,7 +174,7 @@
       const customers = [
         {
           id: 101,
-          name: "John Doe",
+          name: "Ta Quang Trung",
           email: "johndoe@example.com",
           phone: "123-456-7890",
           invoices: [
@@ -167,17 +183,7 @@
               date: "2024-12-01",
               totalAmount: 300,
               products: [
-                { name: "T-Shirt", quantity: 2, price: 50 },
-                { name: "Jeans", quantity: 1, price: 100 },
-              ],
-            },
-            {
-              invoiceId: 2,
-              date: "2024-12-05",
-              totalAmount: 450,
-              products: [
-                { name: "Sweater", quantity: 1, price: 150 },
-                { name: "Hat", quantity: 2, price: 75 },
+                { name: "Brown Leather Backpack", quantity: 20, price: 80.0 },
               ],
             },
           ],
@@ -192,7 +198,9 @@
               invoiceId: 3,
               date: "2024-12-02",
               totalAmount: 150,
-              products: [{ name: "Shirt", quantity: 3, price: 50 }],
+              products: [
+                { name: "Brown Leather Backpack", quantity: 25, price: 80.0 },
+              ],
             },
           ],
         },
@@ -266,7 +274,7 @@
           invoiceCard.appendChild(table);
 
           const totalAmount = document.createElement("p");
-          totalAmount.innerHTML = `<strong>Total Amount: </strong><span id="totalAmount">$${invoice.totalAmount}</span>`;
+
           invoiceCard.appendChild(totalAmount);
 
           invoiceDetailsDiv.appendChild(invoiceCard);

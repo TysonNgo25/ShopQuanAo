@@ -194,18 +194,18 @@
             quantity: 15,
             price: 45.0,
             id: 1,
-            revenue: 45.0 * 150,
+            revenue: 45.0 * 15,
           },
           {
             name: "Black Sneaker",
             quantity: 12,
             price: 35.0,
             id: 2,
-            revenue: 35.0 * 120,
+            revenue: 35.0 * 12,
           },
           {
             name: "Brown Hooded Shirt Jacket",
-            quantity: 80,
+            quantity: 8,
             price: 55.0,
             id: 3,
             revenue: 55.0 * 80,
@@ -215,35 +215,35 @@
             quantity: 21,
             price: 30.0,
             id: 4,
-            revenue: 30.0 * 200,
+            revenue: 30.0 * 21,
           },
           {
             name: "Black Floral Graphic T-Shirt",
             quantity: 29,
             price: 25.0,
             id: 5,
-            revenue: 25.0 * 200,
+            revenue: 25.0 * 29,
           },
           {
             name: "Perfume Set",
             quantity: 2,
             price: 75.0,
             id: 6,
-            revenue: 75.0 * 200,
+            revenue: 75.0 * 2,
           },
           {
             name: "White Utility Backpack",
-            quantity: 22,
+            quantity: 4,
             price: 50.0,
             id: 7,
-            revenue: 50.0 * 20,
+            revenue: 50.0 * 4,
           },
           {
             name: "Comouflage Hooded Jacket",
             quantity: 10,
             price: 60.0,
             id: 8,
-            revenue: 60.0 * 100,
+            revenue: 60.0 * 10,
           },
           {
             name: "Brown Leather Backpack",
@@ -261,26 +261,26 @@
           },
           {
             name: "Fringed Black Scarf",
-            quantity: 20,
+            quantity: 6,
             price: 35.0,
             id: 11,
-            revenue: 35.0 * 201,
+            revenue: 35.0 * 6,
           },
           {
             name: "Navy Henley T-shirt",
             quantity: 30,
             price: 20.0,
             id: 12,
-            revenue: 20.0 * 301,
+            revenue: 20.0 * 30,
           },
         ];
 
         const customerData = [
-          { name: "Ta Quang Trung", revenue: 1500, id: 1 },
-          { name: "Huynh Ngoc Truc", revenue: 1200, id: 2 },
-          { name: "Ngo Nguyen Thanh Nhan", revenue: 1100, id: 3 },
-          { name: "Nguyen Minh Khang", revenue: 1000, id: 4 },
-          { name: "Vu Gia Huy", revenue: 900, id: 5 },
+          { name: "Ta Quang Trung", revenue: 960, id: 1 },
+          { name: "Huynh Ngoc Truc", revenue: 610, id: 2 },
+          { name: "Ngo Nguyen Thanh Nhan", revenue: 520, id: 3 },
+          { name: "Nguyen Minh Khang", revenue: 375, id: 4 },
+          { name: "Vu Gia Huy", revenue: 285, id: 5 },
         ];
 
         // Hàm hiển thị bảng sản phẩm
@@ -305,7 +305,7 @@
                 <td>${product.name}</td>
                 <td>${product.quantity}</td>
                 <td>$${product.revenue}</td>
-                <td><a href="invoice.html?product_id=${product.id}">View Invoice</a></td>
+                <td><a href="invoice-customer-${product.id}.html">View Invoice</a></td>
             </tr>
         `;
           });
@@ -329,7 +329,7 @@
                         <tr>
                             <td>${customer.name}</td>
                             <td>$${customer.revenue}</td>
-                            <td><a href="invoice.html?customer_id=${customer.id}">View Invoice</a></td>
+                            <td><a href="invoice-product-${customer.id}.html">View Invoice</a></td>
                         </tr>
                     `;
           });
