@@ -1,7 +1,5 @@
 <!-- yourcart.html -->
 
-
-
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
@@ -17,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    
+
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -40,11 +38,9 @@
         margin: 0 auto;
         padding: 20px;
         border-radius: 8px;
-        
       }
       h1 {
         text-align: center;
-        
       }
       table {
         width: 100%;
@@ -78,7 +74,7 @@
         display: block;
         margin-top: 20px;
         padding: 10px;
-        background-color:black;
+        background-color: black;
         color: white;
         text-align: center;
         text-decoration: none;
@@ -88,10 +84,8 @@
         background-color: gray;
       }
     </style>
-   
   </head>
   <title>Lịch Sử Mua Hàng</title>
-    
 
   <body>
     <!-- Page Preloder -->
@@ -117,7 +111,6 @@
         </div>
       </div>
       <div class="offcanvas__nav__option">
-    
         <a href="shopping-cart.html"
           ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
         >
@@ -128,7 +121,7 @@
       </div>
     </div>
     <!-- Offcanvas Menu End -->
-    
+
     <!-- Header Section Begin -->
     <header class="header">
       <div class="header__top">
@@ -187,8 +180,6 @@
           </div>
           <div class="col-lg-3 col-md-3">
             <div class="header__nav__option">
-              
-              
               <a href="./shopping-cart.html"
                 ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
               >
@@ -197,104 +188,43 @@
         </div>
         <div class="canvas__open"><i class="fa fa-bars"></i></div>
       </div>
-     
     </header>
     <!-- Header Section End -->
-    
-   <!-- your cart -->
-   <div class="container">
-    <h1>Lịch Sử Mua Hàng</h1>
 
-    <!-- Bảng hiển thị sản phẩm trong giỏ hàng -->
-    <table id="cart-table">
-      <thead>
-        <tr>
-          <th>Tên Sản Phẩm</th>
-          <th>Số Lượng</th>
-          <th>Giá Tiền</th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Sản phẩm sẽ được thêm vào đây thông qua JavaScript -->
-      </tbody>
-    </table>
+    <!-- your cart -->
+    <div class="container">
+      <h1>Lịch Sử Mua Hàng</h1>
 
-    <!-- Thông tin giao hàng -->
-    <div class="order-details">
-      <h3>Thông Tin Giao Hàng</h3>
-      <p><strong>Người nhận:</strong> <span id="recipient"></span></p>
-      <p><strong>Số điện thoại:</strong> <span id="phone"></span></p>
-      <p><strong>Địa chỉ:</strong> <span id="address"></span></p>
-      <p><strong>Tổng giá trị đơn hàng:</strong><span id="total"> </span></p>
-      <p>
-        <strong>Phương thức thanh toán:</strong>
-        <span id="payment-method"></span>
-      </p>
+      <!-- Bảng hiển thị sản phẩm trong giỏ hàng -->
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th>Tên Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Giá Tiền</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sản phẩm sẽ được thêm vào đây thông qua JavaScript -->
+        </tbody>
+      </table>
+
+      <!-- Thông tin giao hàng -->
+      <div class="order-details">
+        <h3>Thông Tin Giao Hàng</h3>
+        <p><strong>Người nhận:</strong> <span id="recipient"></span></p>
+        <p><strong>Số điện thoại:</strong> <span id="phone"></span></p>
+        <p><strong>Địa chỉ:</strong> <span id="address"></span></p>
+        <p><strong>Tổng giá trị đơn hàng:</strong><span id="total"> </span></p>
+        <p>
+          <strong>Phương thức thanh toán:</strong>
+          <span id="payment-method"></span>
+        </p>
+      </div>
+
+      <a href="shop.html" class="back-button">Tiếp tục mua hàng</a>
     </div>
 
-    <a href="shop.html" class="back-button">Tiếp tục mua hàng</a>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function updateCartUI() {
-        const cartTableBody = document.querySelector("#cart-table tbody");
-        const cartSubtotal = document.querySelector(".cart__total ul li:nth-last-child(2) span");
-        const cartTotal = document.querySelector(".cart__total ul li:last-child span");
-
-        if (cart.length === 0) {
-            cartTableBody.innerHTML = `<tr><td colspan="4" class="text-center">Your cart is empty!</td></tr>`;
-            if (cartTotal) cartTotal.textContent = "$0.00";
-            return;
-        }
-
-        cartTableBody.innerHTML = cart
-            .map(
-                (item, index) => `
-            <tr>
-              <td class="product__cart__item">
-                <div class="product__cart__item__pic">
-                  <img src="${item.image}" alt="${item.name}" />
-                </div>
-                <div class="product__cart__item__text">
-                  <h6>${item.name}</h6>
-                </div>
-              </td>
-              <td class="quantity__item">
-                <div class="quantity">
-                  <span>${item.quantity}</span>
-                </div>
-              </td>
-              <td class="cart__price">$${(item.price * item.quantity).toFixed(2)}</td>
-            </tr>`
-            )
-            .join("");
-
-        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const totalElement = document.getElementById("total");
-        if (totalElement) totalElement.textContent = `$${totalPrice.toFixed(2)}`;
-        if (cartTotal) cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
-        if (cartSubtotal) cartSubtotal.textContent = `$${totalPrice.toFixed(2)}`;
-    }
-
-    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-    if (orderDetails) {
-        document.getElementById("recipient").textContent = orderDetails.recipient;
-        document.getElementById("phone").textContent = orderDetails.phone;
-        document.getElementById("address").textContent = orderDetails.address;
-        document.getElementById("payment-method").textContent = orderDetails.paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Thẻ tín dụng';
-    } else {
-        alert("Không tìm thấy thông tin đơn hàng.");
-    }
-
-    updateCartUI();
-});
-
-   
-  </script>
     <!-- Footer -->
 
     <!-- About Section Begin -->
@@ -401,10 +331,6 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
-    
-    
-    
-
-   
+    <script src="js/cart.js"></script>
   </body>
 </html>

@@ -6,12 +6,17 @@ function registerUser() {
   const email = document.getElementById("registerEmail");
   const phone = document.getElementById("registerPhone");
   const address = document.getElementById("registerAddress"); // Thêm trường Address
-  const fullname=document.getElementById("registerFullname");
-
+  const fullname = document.getElementById("registerFullname");
 
   if (username && password && email && phone && address && fullname) {
-    if (username.value && password.value && email.value && phone.value &&
-      address.value && fullname.value ) {
+    if (
+      username.value &&
+      password.value &&
+      email.value &&
+      phone.value &&
+      address.value &&
+      fullname.value
+    ) {
       localStorage.setItem("username", username.value);
       localStorage.setItem("password", password.value);
       localStorage.setItem("email", email.value);
@@ -19,7 +24,6 @@ function registerUser() {
       localStorage.setItem("address", address.value);
       localStorage.setItem("fullname", fullname.value);
 
-      
       alert("Đăng ký thành công!");
       window.location.href = "login.html";
     } else {
@@ -48,81 +52,6 @@ function loginUser() {
   }
 }
 
-
-
-// Kiểm tra trạng thái đăng nhập
-function checkLoginStatus() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  const loginButton = document.querySelector("#userMenu");
-
-  if (isLoggedIn === "true") {
-    loginButton.innerHTML = `
-      <div class="user-menu">
-        <span>${loggedInUser}</span>
-        <ul class="user-options">
-          <li><a href="profile.html">Profile</a></li>
-           <li><a href="yourcart.html">Your cart</a></li>
-          <li><button onclick="logout()" style="border:none; background:none; color:white; cursor:pointer;">LOG OUT</button></li>
-        </ul>
-      </div>
-    `;
-
-    // Thêm CSS để hiển thị menu dạng dropdown khi hover
-    const style = document.createElement("style");
-    style.innerHTML = `
-      .user-menu {
-        position: relative;
-        display: inline-block;
-        color: white;
-      }
-
-      .user-options {
-        display: none;
-        position: absolute;
-        background-color: #333;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-        z-index: 9999;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-      }
-
-      .user-options li {
-        padding: 10px 20px; /* Tăng chiều cao và căn lề */
-        line-height: 1.5; /* Chiều cao dòng đồng đều */
-        text-align: left; /* Căn chữ trái */
-        display: flex;
-        align-items: center; /* Căn giữa theo chiều dọc */
-      }
-
-      .user-options li a, .user-options li button {
-        color: white;
-        text-decoration: none;
-        display: block;
-        width: 100%; /* Đảm bảo phần tử chiếm toàn bộ chiều rộng */
-        text-align: left;
-        font-size: 14px; /* Cỡ chữ phù hợp */
-      }
-
-      .user-options li:hover {
-        background-color: #575757; /* Màu nền khi hover */
-      }
-
-      .user-menu:hover .user-options {
-        display: block;
-      }
-    `;
-    document.head.appendChild(style);
-  } else {
-    loginButton.innerHTML = `<a href="login.html">Sign in</a>`;
-  }
-}
-
-// Đăng xuất
-
 // Kiểm tra đăng nhập trước khi thêm vào giỏ hàng
 function addToCart() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -135,28 +64,6 @@ function addToCart() {
   }
 }
 
-
-
-function logout() {
-  
-    // Hiển thị hộp thoại xác nhận
-    const isConfirmed = confirm("Bạn có chắc chắn muốn đăng xuất không?");
-    
-    if (isConfirmed) {
-      // Nếu người dùng chọn OK, tiến hành đăng xuất
-      localStorage.removeItem("isLoggedIn"); // Xóa trạng thái đăng nhập
-      alert("Đã đăng xuất thành công!");
-      window.location.href = "login.html"; // Chuyển hướng đến trang đăng nhập
-    } else {
-      // Nếu người dùng chọn Cancel, hủy bỏ hành động
-      alert("Hủy đăng xuất!");
-    
-  }
-  
-  localStorage.setItem("isLoggedIn", "false");
-  localStorage.removeItem("loggedInUser"); // Xóa tên người dùng
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.querySelector("#userMenu");
   if (loginButton) {
@@ -164,4 +71,133 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("Element #userMenu not found in the DOM.");
   }
+});
+
+function checkLoginStatus() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const loginButton = document.querySelector("#userMenu");
+
+  if (isLoggedIn === "true") {
+    // Cập nhật giao diện menu dropdown
+    loginButton.innerHTML = `
+          <div class="user-menu">
+              <span>${loggedInUser}</span>
+              <ul class="user-options">
+                  <li><a href="profile.html">Profile</a></li>
+                  <li><a href="yourcart.html">Your cart</a></li>
+                  <li><button onclick="logout()" style="border:none; background:none; color:white; cursor:pointer;">LOG OUT</button></li>
+              </ul>
+          </div>
+      `;
+
+    // CSS để hỗ trợ dropdown
+    addDropdownStyles();
+  } else {
+    loginButton.innerHTML = `<a href="login.html">Sign in</a>`;
+  }
+}
+
+function addDropdownStyles() {
+  const style = document.createElement("style");
+  style.innerHTML = `
+      .user-menu {
+          position: relative;
+          display: inline-block;
+      }
+
+      .user-options {
+          display: none;
+          position: absolute;
+          background-color: #333;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+          z-index: 9999;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      .user-options li {
+          padding: 10px 20px;
+          line-height: 1.5;
+          text-align: left;
+      }
+
+      .user-options li a, .user-options li button {
+          color: white;
+          text-decoration: none;
+          display: block;
+          width: 100%;
+          font-size: 14px;
+      }
+
+      .user-options li:hover {
+          background-color: #575757;
+      }
+
+      .user-menu:hover .user-options {
+          display: block;
+      }
+  `;
+  document.head.appendChild(style);
+}
+
+function logout() {
+  const isConfirmed = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+  if (isConfirmed) {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("loggedInUser");
+    alert("Đã đăng xuất thành công!");
+    window.location.href = "login.html";
+  } else {
+    alert("Hủy đăng xuất!");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || [];
+  const cartTableBody = document.querySelector("#cart-table tbody");
+
+  if (orderHistory.length === 0) {
+    cartTableBody.innerHTML = `<tr><td colspan="4" class="text-center">Không có đơn hàng nào.</td></tr>`;
+    return;
+  }
+
+  const latestOrder = orderHistory[orderHistory.length - 1]; // Hiển thị đơn hàng mới nhất
+
+  // Hiển thị thông tin đơn hàng
+  const { recipient, phone, address, paymentMethod, totalPrice, items } =
+    latestOrder;
+  document.getElementById("recipient").textContent = recipient;
+  document.getElementById("phone").textContent = phone;
+  document.getElementById("address").textContent = address;
+  document.getElementById("payment-method").textContent =
+    paymentMethod === "cash" ? "Thanh toán khi nhận hàng" : "Thẻ tín dụng";
+  document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
+
+  // Hiển thị các sản phẩm trong đơn hàng
+  cartTableBody.innerHTML = items
+    .map(
+      (item, index) => `
+            <tr>
+              <td class="product__cart__item">
+                <div class="product__cart__item__pic">
+                  <img src="${item.image}" alt="${item.name}" />
+                </div>
+                <div class="product__cart__item__text">
+                  <h6>${item.name}</h6>
+                </div>
+              </td>
+              <td class="quantity__item">
+                <div class="quantity">
+                  <span>${item.quantity}</span>
+                </div>
+              </td>
+              <td class="cart__price">$${(item.price * item.quantity).toFixed(
+                2
+              )}</td>
+            </tr>`
+    )
+    .join("");
 });

@@ -94,11 +94,13 @@ document.addEventListener("DOMContentLoaded", function () {
     addCartDetailButton.addEventListener("click", function (event) {
       event.preventDefault(); // Ngăn chặn hành vi mặc định
 
-      const productElement = addCartDetailButton.closest(".product__details__content");
+      const productElement = addCartDetailButton.closest(
+        ".product__details__content"
+      );
       const name = productElement.querySelector("h4").textContent.trim();
       const price = parseFloat(addCartDetailButton.dataset.price);
       const imageElement = productElement.querySelector(".set-bg");
-      const image = imageElement ? imageElement.dataset.setbg : null; 
+      const image = imageElement ? imageElement.dataset.setbg : null;
 
       const id = `detail-${name}-${price}`.replace(/\s+/g, "-").toLowerCase();
       const product = { id, name, price, image };
@@ -118,7 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const index = target.dataset.index;
 
       if (target.classList.contains("remove-btn")) {
-        const confirmDelete = confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?");
+        const confirmDelete = confirm(
+          "Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?"
+        );
         if (confirmDelete) {
           cart.splice(index, 1);
           localStorage.setItem("cart", JSON.stringify(cart));
@@ -159,18 +163,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 //-----------------------------------------checkout------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const checkbox = document.getElementById("different-address");
   const placeOrderBtn = document.querySelector(".place-order-btn");
-  
 
   function updateCheckoutUI() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const orderList = document.querySelector(".checkout__total__products");
-    const totalElement = document.querySelector(".checkout__total__all li:last-child span");
-    const subtotalElement = document.querySelector(".checkout__total__all li:first-child span");
+    const totalElement = document.querySelector(
+      ".checkout__total__all li:last-child span"
+    );
+    const subtotalElement = document.querySelector(
+      ".checkout__total__all li:first-child span"
+    );
 
     if (cart.length === 0) {
       orderList.innerHTML = "<li>No items in cart</li>";
@@ -182,18 +188,28 @@ document.addEventListener("DOMContentLoaded", function () {
     let totalPrice = 0;
 
     orderList.innerHTML = cart
-      .map((item) => `
-        <li>${item.quantity} x ${item.name} <span>$${(item.price * item.quantity).toFixed(2)}</span></li>
-      `).join("");
+      .map(
+        (item) => `
+        <li>${item.quantity} x ${item.name} <span>$${(
+          item.price * item.quantity
+        ).toFixed(2)}</span></li>
+      `
+      )
+      .join("");
 
-    totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    totalPrice = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
     subtotalElement.textContent = `$${totalPrice.toFixed(2)}`;
     totalElement.textContent = `$${totalPrice.toFixed(2)}`;
   }
 
   placeOrderBtn.addEventListener("click", function () {
     let recipient, phone, address;
-    const selectedMethod = document.querySelector('input[name="payment-method"]:checked').value;
+    const selectedMethod = document.querySelector(
+      'input[name="payment-method"]:checked'
+    ).value;
 
     if (checkbox.checked) {
       recipient = document.getElementById("other-full-name").value;
@@ -205,20 +221,39 @@ document.addEventListener("DOMContentLoaded", function () {
       address = localStorage.getItem("address");
 
       if (!recipient || !phone || !address) {
-        alert("Không tìm thấy thông tin mặc định. Vui lòng cập nhật thông tin cá nhân.");
+        alert(
+          "Không tìm thấy thông tin mặc định. Vui lòng cập nhật thông tin cá nhân."
+        );
         return;
       }
     }
 
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalPrice = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
     const orderDetails = {
-      recipient: recipient,
-      phone: phone,
-      address: address,
+      recipient,
+      phone,
+      address,
       paymentMethod: selectedMethod,
+      totalPrice,
+      items: cart,
+      orderDate: new Date().toLocaleString(),
     };
 
-    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
-    alert("Đặt hàng thành công , Cảm ơn quý khách!");
+    // Lưu lịch sử đơn hàng
+    const orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || [];
+    orderHistory.push(orderDetails);
+    localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
+
+    alert("Đặt hàng thành công, cảm ơn quý khách!");
+
+    // Xóa giỏ hàng
+    localStorage.removeItem("cart");
+    window.location.href = "yourcart.html"; // Chuyển đến trang lịch sử đơn hàng
   });
 
   if (window.location.pathname.includes("checkout.html")) {
@@ -250,42 +285,41 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-// Lấy phương thức thanh toán đã được chọn
-    const selectedMethod = document.querySelector(
-      'input[name="payment-method"]:checked'
-    ).value;
+  // Lấy phương thức thanh toán đã được chọn
+  const selectedMethod = document.querySelector(
+    'input[name="payment-method"]:checked'
+  ).value;
 
-    if (selectedMethod === "transfer") {
-      // Kiểm tra xem người dùng đã nhập mã tham chiếu chuyển khoản chưa
-      const reference = document.getElementById("bank-reference").value;
-      if (!reference) {
-        alert("Please provide a reference number for the bank transfer.");
-        return;
-      }
-      alert("Your bank transfer order has been placed!");
-    } else if (selectedMethod === "card") {
-      // Lấy thông tin thẻ từ form
-      const cardNumber = document.getElementById("card-number").value;
-      const cardHolder = document.getElementById("card-holder").value;
-      const expiryDate = document.getElementById("expiry-date").value;
-      const cvv = document.getElementById("cvv").value;
-document
-    .getElementById("card-number")
-    .addEventListener("input", function (e) {
-      const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
-      e.target.value = value.replace(/(\d{4})/g, "$1 ").trim(); // Thêm khoảng trắng sau mỗi 4 số
-    });
+  if (selectedMethod === "transfer") {
+    // Kiểm tra xem người dùng đã nhập mã tham chiếu chuyển khoản chưa
+    const reference = document.getElementById("bank-reference").value;
+    if (!reference) {
+      alert("Please provide a reference number for the bank transfer.");
+      return;
+    }
+    alert("Your bank transfer order has been placed!");
+  } else if (selectedMethod === "card") {
+    // Lấy thông tin thẻ từ form
+    const cardNumber = document.getElementById("card-number").value;
+    const cardHolder = document.getElementById("card-holder").value;
+    const expiryDate = document.getElementById("expiry-date").value;
+    const cvv = document.getElementById("cvv").value;
+    document
+      .getElementById("card-number")
+      .addEventListener("input", function (e) {
+        const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
+        e.target.value = value.replace(/(\d{4})/g, "$1 ").trim(); // Thêm khoảng trắng sau mỗi 4 số
+      });
 
-  document
-    .getElementById("expiry-date")
-    .addEventListener("input", function (e) {
-      const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
-      if (value.length <= 2) {
-        e.target.value = value; // Nếu dưới 2 số, không thêm dấu "/"
-      } else {
-        e.target.value = value.slice(0, 2) + "/" + value.slice(2, 4); // Định dạng MM/YY
-      }
-    });
-  
-    }})
-
+    document
+      .getElementById("expiry-date")
+      .addEventListener("input", function (e) {
+        const value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
+        if (value.length <= 2) {
+          e.target.value = value; // Nếu dưới 2 số, không thêm dấu "/"
+        } else {
+          e.target.value = value.slice(0, 2) + "/" + value.slice(2, 4); // Định dạng MM/YY
+        }
+      });
+  }
+});
