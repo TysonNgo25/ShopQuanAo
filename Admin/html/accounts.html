@@ -8,8 +8,22 @@
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/fontawesome.min.css">
   <link rel="stylesheet" href="../css/templatemo-style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
+    .position-relative {
+  position: relative;
+}
+
+#togglePassword, #toggleConfirmPassword {
+  font-size: 20px;
+  color: #aaa;
+}
+
+#togglePassword:hover, #toggleConfirmPassword:hover {
+  color: #000;
+}
     .header {
       background-color: black;
       color: white;
@@ -50,6 +64,9 @@
         font-size: 20px;
       }
     }
+    /* Vị trí căn chỉnh con mắt bên trong trường nhập mật khẩu */
+
+
   </style>
 </head>
 <body>
@@ -63,7 +80,14 @@
     <div class="form-group">
       <input type="text" id="newUserName" class="form-control" placeholder="Tên người dùng">
       <input type="email" id="newUserEmail" class="form-control mt-2" placeholder="Email người dùng">
-      <select id="newUserRole" class="form-control mt-2">
+      <div class="form-group position-relative">
+        <label for="newUserPassword">Mật khẩu người dùng</label>
+        <input type="password" id="newUserPassword" class="form-control" placeholder="Mật khẩu người dùng">
+        <i class="fas fa-eye-slash position-absolute" id="togglePassword" style="right: 10px; top: 75%; transform: translateY(-50%); cursor: pointer;"></i>
+      </div>
+      
+      
+      <select id="newUserRole" class="form-control mt-2" style="padding-top: 15px;">
         <option value="Admin">Admin</option>
         <option value="Editor">Editor</option>
         <option value="Merchant">Merchant</option>
@@ -71,6 +95,7 @@
       </select>
       <button id="addUserBtn" class="btn btn-primary mt-2">Thêm người dùng</button>
     </div>
+    
 
     <table class="table table-bordered mt-4">
       <thead>
@@ -90,48 +115,52 @@
   </div>
 
   <!-- Modal chỉnh sửa người dùng -->
-  <div class="modal" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa người dùng</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <input type="hidden" id="editUserId" />
-            <div class="form-group">
-              <label for="editUserName">Tên người dùng</label>
-              <input type="text" id="editUserName" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-              <label for="editUserEmail">Email người dùng</label>
-              <input type="email" id="editUserEmail" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-              <label for="editUserRole">Vai trò</label>
-              <select id="editUserRole" class="form-control" disabled />
-                <option value="Admin">Admin</option>
-                <option value="Editor">Editor</option>
-                <option value="Merchant">Merchant</option>
-                <option value="Customer">Customer</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="editUserPassword">Mật khẩu mới</label>
-              <input type="password" id="editUserPassword" class="form-control" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn btn-primary" id="saveEditBtn">Lưu thay đổi</button>
-        </div>
+<div class="modal" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa người dùng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="hidden" id="editUserId" />
+          <div class="form-group">
+            <label for="editUserName">Tên người dùng</label>
+            <input type="text" id="editUserName" class="form-control" disabled />
+          </div>
+          <div class="form-group">
+            <label for="editUserEmail">Email người dùng</label>
+            <input type="email" id="editUserEmail" class="form-control" disabled />
+          </div>
+          <div class="form-group">
+            <label for="editUserRole">Vai trò</label>
+            <select id="editUserRole" class="form-control" disabled />
+              <option value="Admin">Admin</option>
+              <option value="Editor">Editor</option>
+              <option value="Merchant">Merchant</option>
+              <option value="Customer">Customer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editUserPassword" style="color: black;">Mật khẩu mới</label>
+            <input type="password" id="editUserPassword" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="editUserConfirmPassword" style="color: black;">Xác nhận mật khẩu</label>
+            <input type="password" id="editUserConfirmPassword" class="form-control" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" id="saveEditBtn">Lưu thay đổi</button>
       </div>
     </div>
   </div>
+</div>
 
   <footer>
     <p>&copy; 2024 Product Management. All Rights Reserved.</p>
@@ -140,33 +169,105 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
     $(document).ready(function () {
-      let users = JSON.parse(localStorage.getItem('users')) || [];
+  // Toggle mật khẩu
+  $("#togglePassword").click(function () {
+    const passwordField = $("#newUserPassword");
+    const type = passwordField.attr("type") === "password" ? "text" : "password";
+    passwordField.attr("type", type);
+    
+    // Thay đổi icon giữa mắt đóng và mở
+    $(this).toggleClass("fa-eye fa-eye-slash");
+  });
 
-      // Hiển thị danh sách người dùng
+  // Toggle xác nhận mật khẩu
+  $("#toggleConfirmPassword").click(function () {
+    const confirmPasswordField = $("#newUserConfirmPassword");
+    const type = confirmPasswordField.attr("type") === "password" ? "text" : "password";
+    confirmPasswordField.attr("type", type);
+    
+    // Thay đổi icon giữa mắt đóng và mở
+    $(this).toggleClass("fa-eye fa-eye-slash");
+  });
+});
+
+    $(document).ready(function () {
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Hiển thị danh sách người dùng
+  renderUserList();
+
+  // Thêm người dùng mới
+  $("#addUserBtn").click(function () {
+    const name = $("#newUserName").val();
+    const email = $("#newUserEmail").val();
+    const role = $("#newUserRole").val();
+    const password = $("#newUserPassword").val();
+    const confirmPassword = $("#newUserConfirmPassword").val(); // Lấy mật khẩu xác nhận
+
+    // Kiểm tra mật khẩu và xác nhận mật khẩu có khớp không
+    if (password !== confirmPassword) {
+      alert('Mật khẩu và xác nhận mật khẩu không khớp! Vui lòng nhập lại mật khẩu.');
+      $("#newUserPassword").val('');   // Xóa trường mật khẩu
+      $("#newUserConfirmPassword").val(''); // Xóa trường xác nhận mật khẩu
+      return;  // Dừng quá trình nếu mật khẩu không khớp
+    }
+
+    // Kiểm tra nếu các trường nhập không trống
+    if (name && email && role && password) {
+      const newUser = {
+        id: generateRandomId(),
+        name: name,
+        email: email,
+        role: role,
+        password: password,  // Lưu mật khẩu người dùng
+        isLocked: false
+      };
+
+      // Thêm người dùng vào danh sách
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
       renderUserList();
+      alert('Thêm người dùng thành công!');
+    } else {
+      alert('Vui lòng điền đầy đủ thông tin!');
+    }
+  });
 
-      // Thêm người dùng mới
-      $("#addUserBtn").click(function () {
-        const name = $("#newUserName").val();
-        const email = $("#newUserEmail").val();
-        const role = $("#newUserRole").val();
+  // Hàm hiển thị danh sách người dùng
+  function renderUserList() {
+    const tableBody = $("tbody");
+    tableBody.empty();
 
-        if (name && email && role) {
-          const newUser = {
-            id: generateRandomId(),
-            name: name,
-            email: email,
-            role: role,
-            isLocked: false
-          };
-          users.push(newUser);
-          localStorage.setItem('users', JSON.stringify(users));
-          renderUserList();
-          alert('Thêm người dùng thành công!');
-        } else {
-          alert('Vui lòng điền đầy đủ thông tin!');
-        }
-      });
+    users.forEach(user => {
+      const userRow = `<tr>
+          <th scope="row">${user.id}</th>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.role}</td>
+          <td><span class="badge ${user.isLocked ? 'badge-warning' : 'badge-success'}">${user.isLocked ? 'Đã khóa' : 'Đang hoạt động'}</span></td>
+          <td>
+            <a href="#" class="btn btn-info btn-sm edit-user" data-user-id="${user.id}">Sửa</a>
+            <button class="btn btn-warning btn-sm lock-user" data-user-id="${user.id}" ${user.isLocked ? 'disabled' : ''}>Khóa</button>
+            <button class="btn btn-success btn-sm unlock-user" data-user-id="${user.id}" ${!user.isLocked ? 'disabled' : ''}>Mở khóa</button>
+            <button class="btn btn-danger btn-sm delete-user" data-user-id="${user.id}">Xóa</button>
+          </td>
+        </tr>`;
+      tableBody.append(userRow);
+    });
+  }
+
+  // Hàm tạo ID ngẫu nhiên
+  function generateRandomId() {
+    return Math.floor(Math.random() * 10000);
+  }
+
+
+
+
+
+
+
+
 
       // Hàm hiển thị danh sách người dùng
       function renderUserList() {
@@ -255,40 +356,54 @@
   }
 
   // Sửa người dùng
-  $(document).on('click', '.edit-user', function () {
-    const userId = $(this).data('user-id');
-    const user = users.find(u => u.id === userId);
-    
-    if (user) {
-      $("#editUserId").val(user.id);
-      $("#editUserName").val(user.name);
-      $("#editUserEmail").val(user.email);
-      $("#editUserRole").val(user.role);
+$(document).on('click', '.edit-user', function () {
+  const userId = $(this).data('user-id');
+  const user = users.find(u => u.id === userId);
+  
+  if (user) {
+    $("#editUserId").val(user.id);
+    $("#editUserName").val(user.name);
+    $("#editUserEmail").val(user.email);
+    $("#editUserRole").val(user.role);
+    $("#editUserPassword").val('');  // Đặt lại trường mật khẩu
+    $("#editUserConfirmPassword").val('');  // Đặt lại trường xác nhận mật khẩu
+    $("#editUserModal").modal('show');
+  }
+});
+
+// Lưu thay đổi sau khi chỉnh sửa
+$("#saveEditBtn").click(function () {
+  const userId = $("#editUserId").val();
+  const newPassword = $("#editUserPassword").val();
+  const confirmPassword = $("#editUserConfirmPassword").val();  // Lấy mật khẩu xác nhận
+  const user = users.find(u => u.id === parseInt(userId));
+
+  if (user) {
+    // Kiểm tra mật khẩu và xác nhận mật khẩu có khớp không
+    if (newPassword && newPassword !== confirmPassword) {
+      alert('Mật khẩu và xác nhận mật khẩu không khớp! Vui lòng nhập lại mật khẩu.');
       $("#editUserPassword").val('');
-      $("#editUserModal").modal('show');
+      $("#editUserConfirmPassword").val('');
+      return;  // Dừng lại nếu mật khẩu không khớp
     }
-  });
 
-  // Lưu thay đổi sau khi chỉnh sửa
-  $("#saveEditBtn").click(function () {
-    const userId = $("#editUserId").val();
-    const newPassword = $("#editUserPassword").val();
-    const user = users.find(u => u.id === parseInt(userId));
+    // Cập nhật thông tin người dùng
+    user.name = $("#editUserName").val();
+    user.email = $("#editUserEmail").val();
+    user.role = $("#editUserRole").val();
 
-    if (user) {
-      user.name = $("#editUserName").val();
-      user.email = $("#editUserEmail").val();
-      user.role = $("#editUserRole").val();
-      if (newPassword) {
-        // Cập nhật mật khẩu
-        user.password = newPassword;
-      }
-      localStorage.setItem('users', JSON.stringify(users));
-      renderUserList();
-      $("#editUserModal").modal('hide');
-      alert('Cập nhật thông tin người dùng thành công!');
+    if (newPassword) {
+      // Nếu có mật khẩu mới, cập nhật mật khẩu
+      user.password = newPassword;
     }
-  });
+
+    localStorage.setItem('users', JSON.stringify(users));
+    renderUserList();
+    $("#editUserModal").modal('hide');
+    alert('Cập nhật thông tin người dùng thành công!');
+  }
+});
+
 
   // Khóa người dùng
   $(document).on('click', '.lock-user', function () {
