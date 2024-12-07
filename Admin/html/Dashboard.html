@@ -93,7 +93,7 @@
               <div class="d-flex justify-content-between mb-4">
                 <div>
                   <label for="startDate">Start Date:</label>
-                  <input type="date" id="startDate" />
+                  <input type="date" id="startDate" value="2024-12-01" />
                 </div>
                 <div>
                   <label for="endDate">End Date:</label>
@@ -361,20 +361,62 @@
         }
 
         // Hàm lọc dữ liệu theo ngày
+        // Sao lưu dữ liệu gốc
+        // Sao lưu dữ liệu gốc
+        const originalProductData = JSON.parse(JSON.stringify(productData)); // Deep copy
+
+        // Sao lưu dữ liệu gốc
+
         function filterData() {
           const startDate = document.getElementById("startDate").value;
           const endDate = document.getElementById("endDate").value;
 
-          // Sử dụng startDate và endDate để lọc dữ liệu (hiện tại chỉ là ví dụ)
-          alert(`Filtering data from ${startDate} to ${endDate}`);
-        }
+          // Kiểm tra ngày bắt đầu và ngày kết thúc
+          if (!startDate || !endDate) {
+            alert("Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc!");
+            return;
+          }
 
-        // Khởi tạo khi trang load
-        window.onload = function () {
+          const startDateObj = new Date(startDate);
+          const endDateObj = new Date(endDate);
+
+          if (startDateObj.getDate() !== 1 || endDateObj.getDate() !== 30) {
+            alert(
+              "Dữ liệu thống kê bắt buộc phải chọn ngày bắt đầu là ngày 1 và ngày kết thúc là ngày 30 của tháng!"
+            );
+            return;
+          }
+
+          // Ngày cơ sở
+          const baseDateStart = new Date("2024-12-01");
+          const baseDateEnd = new Date("2024-12-30");
+
+          productData.forEach((product) => {
+            if (endDateObj < baseDateStart) {
+              // Nếu trước khoảng thời gian gốc, giảm quantity
+              product.quantity = Math.max(
+                0,
+                originalProductData.find((p) => p.id === product.id).quantity -
+                  5
+              );
+            } else if (startDateObj > baseDateEnd) {
+              // Nếu sau khoảng thời gian gốc, tăng quantity
+              product.quantity =
+                originalProductData.find((p) => p.id === product.id).quantity +
+                5;
+            } else {
+              // Nếu trong khoảng thời gian gốc, giữ nguyên dữ liệu
+              product.quantity = originalProductData.find(
+                (p) => p.id === product.id
+              ).quantity;
+            }
+            product.revenue = product.quantity * product.price; // Tính lại revenue
+          });
+
+          // Cập nhật lại bảng
           renderProductTable();
           renderCustomerTable();
-          renderRevenueChart();
-        };
+        }
       </script>
     </div>
   </body>
